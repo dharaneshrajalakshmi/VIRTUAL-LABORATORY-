@@ -1,0 +1,764 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Engineering Virtual Laboratory</title>
+
+<style>
+
+/* GENERAL STYLING */
+
+* {
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    margin: 0;
+    background: #f1f5f9;
+    color: #1e293b;
+}
+
+/* HEADER */
+
+header {
+    background: #12346b;
+    color: white;
+    text-align: center;
+    padding: 30px;
+}
+
+header h1 {
+    margin: 0;
+}
+
+header p {
+    margin-top: 10px;
+}
+
+/* NAVIGATION */
+
+nav {
+    background: #1e293b;
+    padding: 15px;
+    text-align: center;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin: 12px;
+}
+
+/* SECTIONS */
+
+section {
+    background: white;
+    margin: 25px auto;
+    padding: 25px;
+    width: 90%;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+}
+
+h2 {
+    color: #12346b;
+}
+
+/* EXPERIMENT CARDS */
+
+.experiment-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.card {
+    background: #eff6ff;
+    border: 1px solid #bfdbfe;
+    padding: 20px;
+    border-radius: 10px;
+    flex: 1 1 250px;
+}
+
+.card h3 {
+    color: #1e40af;
+}
+
+/* EQUIPMENT IMAGES */
+
+.equipment-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.equipment-container img {
+    width: 220px;
+    height: 150px;
+    object-fit: cover;
+    border: 1px solid #ddd;
+    padding: 5px;
+    border-radius: 8px;
+}
+
+/* VIDEO */
+
+iframe {
+    width: 100%;
+    max-width: 650px;
+    height: 350px;
+    border: none;
+    border-radius: 10px;
+}
+
+/* FORM STYLING */
+
+form {
+    max-width: 550px;
+    margin: auto;
+}
+
+fieldset {
+    border: 2px solid #2563eb;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+legend {
+    color: #1d4ed8;
+    font-weight: bold;
+    padding: 5px;
+}
+
+label {
+    display: block;
+    margin-top: 15px;
+    font-weight: bold;
+}
+
+input, select, textarea {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    margin-top: 7px;
+    border: 1px solid #94a3b8;
+    border-radius: 5px;
+    font-size: 15px;
+}
+
+/* FOCUS EFFECT */
+
+input:focus, select:focus, textarea:focus {
+    outline: none;
+    border: 2px solid #2563eb;
+}
+
+/* INVALID INPUT */
+
+input:invalid, select:invalid, textarea:invalid {
+    border-color: #dc2626;
+}
+
+/* VALID INPUT */
+
+input:valid, select:valid, textarea:valid {
+    border-color: #16a34a;
+}
+
+/* BUTTON */
+
+button {
+    background: #2563eb;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    margin-top: 20px;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+button:hover {
+    background: #1e40af;
+}
+
+/* ERROR MESSAGE */
+
+.error {
+    color: #dc2626;
+    font-size: 13px;
+    margin-top: 5px;
+}
+
+/* SUCCESS MESSAGE */
+
+#successMessage {
+    display: none;
+    background: #dcfce7;
+    color: #166534;
+    border: 1px solid #16a34a;
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 20px;
+    text-align: center;
+}
+
+/* FOOTER */
+
+footer {
+    background: #12346b;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+
+<header>
+
+    <h1>ENGINEERING VIRTUAL LABORATORY</h1>
+
+    <p>Learn | Experiment | Explore | Innovate</p>
+
+</header>
+
+
+<!-- NAVIGATION -->
+
+<nav>
+
+    <a href="#home">Home</a>
+
+    <a href="#experiments">Experiments</a>
+
+    <a href="#equipment">Equipment</a>
+
+    <a href="#video">Video</a>
+
+    <a href="#registration">Student Registration</a>
+
+</nav>
+
+
+<!-- HOME SECTION -->
+
+<section id="home">
+
+    <h2>Welcome to Virtual Laboratory</h2>
+
+    <p>
+        The Engineering Virtual Laboratory is an online learning
+        platform designed for engineering students.
+        It provides experiment details, objectives, procedures,
+        equipment images and instructional videos.
+    </p>
+
+    <p>
+        Students can improve their practical knowledge and
+        understand engineering concepts through digital learning.
+    </p>
+
+</section>
+
+
+<!-- EXPERIMENT SECTION -->
+
+<section id="experiments">
+
+    <h2>Available Experiments</h2>
+
+    <div class="experiment-container">
+
+        <div class="card">
+
+            <h3>Experiment 1: Ohm's Law</h3>
+
+            <p><b>Objective:</b></p>
+
+            <p>
+                To verify Ohm's Law and calculate electrical resistance.
+            </p>
+
+            <p><b>Procedure:</b></p>
+
+            <ul>
+                <li>Connect the electrical circuit.</li>
+                <li>Apply different voltage values.</li>
+                <li>Measure the current.</li>
+                <li>Calculate resistance using V/I.</li>
+            </ul>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>Experiment 2: Logic Gates</h3>
+
+            <p><b>Objective:</b></p>
+
+            <p>
+                To study the working of AND, OR and NOT logic gates.
+            </p>
+
+            <p><b>Procedure:</b></p>
+
+            <ul>
+                <li>Connect the logic gate circuit.</li>
+                <li>Apply different input combinations.</li>
+                <li>Observe the output.</li>
+                <li>Verify the truth table.</li>
+            </ul>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>Experiment 3: DC Motor</h3>
+
+            <p><b>Objective:</b></p>
+
+            <p>
+                To understand the working principle of a DC motor.
+            </p>
+
+            <p><b>Procedure:</b></p>
+
+            <ul>
+                <li>Identify the motor terminals.</li>
+                <li>Connect the DC power supply.</li>
+                <li>Switch on the power.</li>
+                <li>Observe the motor rotation.</li>
+            </ul>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- EQUIPMENT SECTION -->
+
+<section id="equipment">
+
+    <h2>Laboratory Equipment</h2>
+
+    <div class="equipment-container">
+
+        <div>
+
+            <img
+            src="multi meter image.webp"
+            alt="Digital Multimeter">
+
+            <p><b>Digital Multimeter</b></p>
+
+        </div>
+
+
+        <div>
+
+            <img
+            src="oscilloscope.jpg"
+            alt="Oscilloscope">
+
+            <p><b>Oscilloscope</b></p>
+
+        </div>
+
+
+        <div>
+
+            <img
+            src="dc motor.jpg"
+            alt="DC Motor">
+
+            <p><b>DC Motor</b></p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- VIDEO SECTION -->
+
+<section id="video">
+
+    <h2>Instructional Video</h2>
+
+    <p>
+        Watch this video to understand engineering virtual laboratories.
+    </p>
+
+    <br>
+
+    <iframe
+        src="https://www.youtube-nocookie.com/embed/AJsDwJ2ndng"
+        title="Virtual Laboratory Tutorial"
+        allowfullscreen>
+    </iframe>
+
+</section>
+
+
+<!-- STUDENT REGISTRATION FORM -->
+
+<section id="registration">
+
+    <h2>Student Registration Form</h2>
+
+    <p>
+        Students must complete the following details
+        to register for laboratory experiments.
+    </p>
+
+    <br>
+
+    <form id="studentForm">
+
+        <fieldset>
+
+            <legend>Student Information</legend>
+
+
+            <!-- STUDENT NAME -->
+
+            <label for="studentName">Student Name</label>
+
+            <input
+                type="text"
+                id="studentName"
+                placeholder="Enter your full name"
+                minlength="3"
+                maxlength="40"
+                pattern="[A-Za-z ]{3,40}"
+                title="Name must contain 3 to 40 letters"
+                required>
+
+            <p class="error" id="nameError"></p>
+
+
+            <!-- REGISTER NUMBER -->
+
+            <label for="registerNumber">Register Number</label>
+
+            <input
+                type="text"
+                id="registerNumber"
+                placeholder="Example: URK26CS9001"
+                minlength="5"
+                maxlength="15"
+                pattern="[A-Za-z0-9]{5,15}"
+                required>
+
+            <p class="error" id="registerError"></p>
+
+
+            <!-- EMAIL -->
+
+            <label for="email">Email Address</label>
+
+            <input
+                type="email"
+                id="email"
+                placeholder="example@gmail.com"
+                required>
+
+            <p class="error" id="emailError"></p>
+
+
+            <!-- PHONE NUMBER -->
+
+            <label for="phone">Phone Number</label>
+
+            <input
+                type="tel"
+                id="phone"
+                placeholder="Enter 10 digit phone number"
+                pattern="[0-9]{10}"
+                minlength="10"
+                maxlength="10"
+                required>
+
+            <p class="error" id="phoneError"></p>
+
+
+            <!-- DEPARTMENT -->
+
+            <label for="department">Department</label>
+
+            <select id="department" required>
+
+                <option value="">Select Department</option>
+
+                <option value="CSE">Computer Science Engineering</option>
+
+                <option value="ECE">Electronics and Communication</option>
+
+                <option value="EEE">Electrical Engineering</option>
+
+                <option value="MECH">Mechanical Engineering</option>
+
+                <option value="CIVIL">Civil Engineering</option>
+
+            </select>
+
+            <p class="error" id="departmentError"></p>
+
+
+            <!-- SEMESTER -->
+
+            <label for="semester">Semester</label>
+
+            <input
+                type="number"
+                id="semester"
+                placeholder="Enter semester (1-8)"
+                min="1"
+                max="8"
+                required>
+
+            <p class="error" id="semesterError"></p>
+
+
+            <!-- EXPERIMENT -->
+
+            <label for="experiment">Select Experiment</label>
+
+            <select id="experiment" required>
+
+                <option value="">Choose an Experiment</option>
+
+                <option value="Ohm's Law">Ohm's Law</option>
+
+                <option value="Logic Gates">Logic Gates</option>
+
+                <option value="DC Motor">DC Motor</option>
+
+            </select>
+
+
+            <!-- ADDRESS -->
+
+            <label for="address">Address</label>
+
+            <textarea
+                id="address"
+                rows="3"
+                placeholder="Enter your address"
+                minlength="10"
+                maxlength="150"
+                required></textarea>
+
+
+            <!-- SUBMIT BUTTON -->
+
+            <button type="submit">Submit Registration</button>
+
+            <button type="reset">Clear Form</button>
+
+        </fieldset>
+
+    </form>
+
+
+    <!-- SUCCESS MESSAGE -->
+
+    <div id="successMessage">
+
+        <h3>Registration Successful!</h3>
+
+        <p>Your student details have been submitted successfully.</p>
+
+        <p id="studentOutput"></p>
+
+    </div>
+
+</section>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+    <p>© 2026 Engineering Virtual Laboratory</p>
+
+    <p>Designed for Engineering Students</p>
+
+</footer>
+
+
+<!-- JAVASCRIPT VALIDATION -->
+
+<script>
+
+// GET FORM ELEMENT
+
+const form = document.getElementById("studentForm");
+
+
+// GET INPUT ELEMENTS
+
+const nameInput = document.getElementById("studentName");
+
+const registerInput = document.getElementById("registerNumber");
+
+const emailInput = document.getElementById("email");
+
+const phoneInput = document.getElementById("phone");
+
+const semesterInput = document.getElementById("semester");
+
+
+// CUSTOM VALIDATION FOR STUDENT NAME
+
+nameInput.addEventListener("input", function() {
+
+    if(nameInput.value.trim().length < 3) {
+
+        nameInput.setCustomValidity(
+            "Student name must contain at least 3 characters."
+        );
+
+    }
+
+    else {
+
+        nameInput.setCustomValidity("");
+
+    }
+
+});
+
+
+// CUSTOM VALIDATION FOR REGISTER NUMBER
+
+registerInput.addEventListener("input", function() {
+
+    if(!/^[A-Za-z0-9]{5,15}$/.test(registerInput.value)) {
+
+        registerInput.setCustomValidity(
+            "Register number must contain 5 to 15 letters or numbers."
+        );
+
+    }
+
+    else {
+
+        registerInput.setCustomValidity("");
+
+    }
+
+});
+
+
+// CUSTOM VALIDATION FOR PHONE NUMBER
+
+phoneInput.addEventListener("input", function() {
+
+    if(!/^[0-9]{10}$/.test(phoneInput.value)) {
+
+        phoneInput.setCustomValidity(
+            "Please enter a valid 10 digit phone number."
+        );
+
+    }
+
+    else {
+
+        phoneInput.setCustomValidity("");
+
+    }
+
+});
+
+
+// FORM SUBMISSION
+
+form.addEventListener("submit", function(event) {
+
+    // PREVENT PAGE RELOAD
+
+    event.preventDefault();
+
+
+    // CHECK FORM VALIDITY
+
+    if(!form.checkValidity()) {
+
+        form.reportValidity();
+
+        return;
+
+    }
+
+
+    // GET STUDENT DETAILS
+
+    const name = nameInput.value;
+
+    const register = registerInput.value;
+
+    const email = emailInput.value;
+
+    const phone = phoneInput.value;
+
+    const department = document.getElementById("department").value;
+
+    const semester = semesterInput.value;
+
+    const experiment = document.getElementById("experiment").value;
+
+
+    // DISPLAY SUCCESS MESSAGE
+
+    const success = document.getElementById("successMessage");
+
+    const output = document.getElementById("studentOutput");
+
+    output.textContent =
+        "Name: " + name +
+        " | Register Number: " + register +
+        " | Email: " + email +
+        " | Phone: " + phone +
+        " | Department: " + department +
+        " | Semester: " + semester +
+        " | Experiment: " + experiment;
+
+
+    success.style.display = "block";
+
+
+    // RESET FORM
+
+    form.reset();
+
+});
+
+
+// RESET SUCCESS MESSAGE WHEN CLEARING FORM
+
+form.addEventListener("reset", function() {
+
+    document.getElementById("successMessage").style.display = "none";
+
+});
+
+</script>
+
+</body>
+</html>

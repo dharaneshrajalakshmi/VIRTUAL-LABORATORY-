@@ -1,0 +1,811 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virtual Laboratory - Engineering Institution</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background: #f1f5f9;
+            color: #263445;
+        }
+
+        header {
+            background: #12345a;
+            color: white;
+            text-align: center;
+            padding: 25px;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        nav {
+            background: #1d4e89;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            padding: 12px;
+            gap: 25px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            color: rgb(139, 139, 197);
+        }
+
+        section {
+            margin: 25px auto;
+            padding: 25px;
+            max-width: 1150px;
+            background: white;
+            border: 1px solid #d6e0ec;
+            border-radius: 10px;
+        }
+
+        h2 {
+            color: #12345a;
+            border-bottom: 2px solid #1d4e89;
+            padding-bottom: 10px;
+        }
+
+        .experiment-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 20px;
+        }
+
+        .experiment-card {
+            border: 1px solid #cbd5e1;
+            padding: 15px;
+            margin: 5px;
+            border-radius: 8px;
+            transition: 0.3s;
+        }
+
+        .experiment-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px #cbd5e1;
+        }
+
+        .experiment-card img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 6px;
+        }
+
+        .equipment-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .equipment-grid img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+        }
+
+        ul {
+            line-height: 1.8;
+        }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%;
+            height: 0;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 0;
+            top: 0;
+            left: 0;
+        }
+
+        form {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 15px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 11px;
+            border: 1px solid #b8c5d4;
+            border-radius: 5px;
+            font-size: 15px;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: 2px solid #7db4ed;
+            border-color: #1d4e89;
+        }
+
+        textarea {
+            min-height: 80px;
+            resize: vertical;
+        }
+
+        button {
+            background: #1d4e89;
+            color: white;
+            border: none;
+            padding: 11px 17px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+            font-size: 14px;
+        }
+
+        button:hover {
+            background: #12345a;
+        }
+
+        .delete-btn {
+            background: #c0392b;
+        }
+
+        .delete-btn:hover {
+            background: #922b21;
+        }
+
+        .edit-btn {
+            background: rgb(18, 18, 82);
+        }
+
+        .edit-btn:hover {
+            background: #3b407b;
+        }
+
+        .form-actions {
+            grid-column: 1 / -1;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .table-container {
+            overflow-x: auto;
+            margin-top: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 750px;
+        }
+
+        th, td {
+            border: 1px solid #cbd5e1;
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background: #1d4e89;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background: #f1f5f9;
+        }
+
+        td button {
+            margin: 3px;
+        }
+
+        .status-select {
+            min-width: 125px;
+        }
+
+        #message, #studentMessage {
+            margin-top: 15px;
+            font-weight: bold;
+            color: #167443;
+        }
+
+        .full-width {
+            grid-column: 1 / -1;
+        }
+
+        footer {
+            background: #12345a;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 30px;
+        }
+
+        @media (max-width: 600px) {
+            section {
+                margin: 12px;
+                padding: 15px;
+            }
+
+            nav {
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>ENGINEERING VIRTUAL LABORATORY</h1>
+    <p>Learn | Experiment | Explore | Achieve</p>
+</header>
+
+<nav>
+    <a href="#experiments">Experiments</a>
+    <a href="#equipment">Equipment</a>
+    <a href="#video">Video</a>
+    <a href="#student">Student Form</a>
+    <a href="#tasks">Task Manager</a>
+</nav>
+
+<!-- EXPERIMENT LIST -->
+<section id="experiments">
+    <h2>Experiment List</h2>
+
+    <div class="experiment-grid">
+
+        <div class="experiment-card">
+            <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=600"
+                 alt="Electronics laboratory">
+            <h3>1. Ohm's Law Experiment</h3>
+            <p><b>Objective:</b> To verify the relationship between voltage, current and resistance.</p>
+            <p><b>Procedure:</b></p>
+            <ul>
+                <li>Connect the resistor and power supply.</li>
+                <li>Measure voltage and current.</li>
+                <li>Calculate resistance using V = IR.</li>
+                <li>Compare the calculated values.</li>
+            </ul>
+        </div>
+
+        <div class="experiment-card">
+            <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=600"
+                 alt="Engineering experiment">
+            <h3>2. Logic Gates Experiment</h3>
+            <p><b>Objective:</b> To study the operation of basic digital logic gates.</p>
+            <p><b>Procedure:</b></p>
+            <ul>
+                <li>Select AND, OR and NOT gates.</li>
+                <li>Apply different input combinations.</li>
+                <li>Observe the output values.</li>
+                <li>Verify the truth tables.</li>
+            </ul>
+        </div>
+
+        <div class="experiment-card">
+            <img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=600"
+                 alt="Electrical engineering equipment">
+            <h3>3. DC Motor Experiment</h3>
+            <p><b>Objective:</b> To understand the working principle of a DC motor.</p>
+            <p><b>Procedure:</b></p>
+            <ul>
+                <li>Connect the DC motor to the supply.</li>
+                <li>Switch on the power supply.</li>
+                <li>Observe the motor rotation.</li>
+                <li>Study the effect of voltage changes.</li>
+            </ul>
+        </div>
+
+        <div class="experiment-card">
+            <img src="https://images.unsplash.com/photo-1581092334651-ddf26d9a09d0?w=600"
+                 alt="Electrical testing">
+            <h3>4. Kirchhoff's Law Experiment</h3>
+            <p><b>Objective:</b> To verify Kirchhoff's current and voltage laws.</p>
+            <p><b>Procedure:</b></p>
+            <ul>
+                <li>Construct a simple electrical circuit.</li>
+                <li>Measure current in different branches.</li>
+                <li>Measure voltage across components.</li>
+                <li>Verify Kirchhoff's laws.</li>
+            </ul>
+        </div>
+
+    </div>
+</section>
+
+<!-- EQUIPMENT -->
+<section id="equipment">
+    <h2>Laboratory Equipment</h2>
+
+    <div class="equipment-grid">
+        <div>
+            <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=600"
+                 alt="Multimeter">
+            <p><b>Digital Multimeter</b></p>
+        </div>
+
+        <div>
+            <img src="https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?w=600"
+                 alt="Electronic circuit">
+            <p><b>Electronic Circuit Board</b></p>
+        </div>
+
+        <div>
+            <img src="https://images.unsplash.com/photo-1581092795360-fd1ca04f0952?w=600"
+                 alt="Engineering laboratory equipment">
+            <p><b>Laboratory Instruments</b></p>
+        </div>
+    </div>
+</section>
+
+<!-- INSTRUCTIONAL VIDEO -->
+<section id="video">
+    <h2>Instructional Video</h2>
+    <p>Watch the instructional video to understand laboratory experiments.</p>
+
+    <div class="video-container">
+        <iframe
+            src="https://www.youtube-nocookie.com/embed/AJsDwJ2ndng"
+            title="Virtual Laboratory Instructional Video"
+            allowfullscreen>
+        </iframe>
+    </div>
+    <p>If the video is unavailable, replace its video ID with a working instructional video ID.</p>
+</section>
+
+<!-- STUDENT DETAILS FORM -->
+<section id="student">
+    <h2>Student Details Form</h2>
+
+    <form id="studentForm">
+
+        <div class="form-group">
+            <label for="studentName">Student Name</label>
+            <input type="text" id="studentName"
+                   placeholder="Enter your name" required>
+        </div>
+
+        <div class="form-group">
+            <label for="registerNo">Register Number</label>
+            <input type="text" id="registerNo"
+                   placeholder="Enter register number" required>
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email"
+                   placeholder="Enter email address" required>
+        </div>
+
+        <div class="form-group">
+            <label for="department">Department</label>
+            <select id="department" required>
+                <option value="">Select Department</option>
+                <option>Computer Science Engineering</option>
+                <option>Information Technology</option>
+                <option>Electrical and Electronics Engineering</option>
+                <option>Electronics and Communication Engineering</option>
+                <option>Mechanical Engineering</option>
+                <option>Civil Engineering</option>
+            </select>
+        </div>
+
+        <div class="form-group full-width">
+            <label for="studentAddress">Address</label>
+            <textarea id="studentAddress"
+                      placeholder="Enter your address" required></textarea>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit">Submit Student Details</button>
+        </div>
+
+    </form>
+
+    <p id="studentMessage"></p>
+</section>
+
+<!-- EXPERIMENT TASK MANAGER -->
+<section id="tasks">
+    <h2>Experiment Task Manager</h2>
+
+    <p>
+        Create, view, edit, delete and update the status of your
+        laboratory experiment tasks.
+    </p>
+
+    <form id="taskForm">
+
+        <div class="form-group">
+            <label for="taskTitle">Task Title</label>
+            <input type="text" id="taskTitle"
+                   placeholder="Example: Complete Ohm's Law" required>
+        </div>
+
+        <div class="form-group">
+            <label for="taskExperiment">Select Experiment</label>
+            <select id="taskExperiment" required>
+                <option value="">Choose Experiment</option>
+                <option>Ohm's Law Experiment</option>
+                <option>Logic Gates Experiment</option>
+                <option>DC Motor Experiment</option>
+                <option>Kirchhoff's Law Experiment</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="taskStudent">Student Name</label>
+            <input type="text" id="taskStudent"
+                   placeholder="Enter student name" required>
+        </div>
+
+        <div class="form-group">
+            <label for="taskDate">Due Date</label>
+            <input type="date" id="taskDate" required>
+        </div>
+
+        <div class="form-group">
+            <label for="taskStatus">Task Status</label>
+            <select id="taskStatus">
+                <option>Pending</option>
+                <option>In Progress</option>
+                <option>Completed</option>
+            </select>
+        </div>
+
+        <div class="form-group full-width">
+            <label for="taskDescription">Task Description</label>
+            <textarea id="taskDescription"
+                      placeholder="Enter task details"></textarea>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" id="saveButton">Add Task</button>
+            <button type="button" id="cancelButton"
+                    style="display:none;">Cancel Edit</button>
+        </div>
+
+    </form>
+
+    <p id="message"></p>
+
+    <h3>Experiment Task Records</h3>
+
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Task</th>
+                    <th>Experiment</th>
+                    <th>Student</th>
+                    <th>Due Date</th>
+                    <th>Status</th>
+                    <th>Description</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+
+            <tbody id="taskTableBody">
+                <!-- JavaScript displays tasks here -->
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<footer>
+    <p>Engineering Virtual Laboratory</p>
+    <p>Designed for Engineering Students</p>
+</footer>
+
+<script>
+
+// Get HTML elements
+const taskForm = document.getElementById("taskForm");
+const taskTableBody = document.getElementById("taskTableBody");
+const message = document.getElementById("message");
+const saveButton = document.getElementById("saveButton");
+const cancelButton = document.getElementById("cancelButton");
+
+// Get saved tasks from Local Storage
+let tasks = JSON.parse(localStorage.getItem("labTasks")) || [];
+
+// Store the ID of the task being edited
+let editingId = null;
+
+// Save tasks to Local Storage
+function saveTasks() {
+    localStorage.setItem("labTasks", JSON.stringify(tasks));
+}
+
+// Display all tasks in the table
+function displayTasks() {
+
+    // Remove old table rows
+    while (taskTableBody.firstChild) {
+        taskTableBody.firstChild.remove();
+    }
+
+    // Read tasks using filter()
+    const visibleTasks = tasks.filter(function(task) {
+        return true;
+    });
+
+    if (visibleTasks.length === 0) {
+        const row = document.createElement("tr");
+        const cell = document.createElement("td");
+
+        cell.colSpan = 7;
+        cell.textContent = "No experiment tasks available.";
+
+        row.appendChild(cell);
+        taskTableBody.appendChild(row);
+        return;
+    }
+
+    visibleTasks.forEach(function(task) {
+
+        const row = document.createElement("tr");
+
+        const titleCell = document.createElement("td");
+        titleCell.textContent = task.title;
+
+        const experimentCell = document.createElement("td");
+        experimentCell.textContent = task.experiment;
+
+        const studentCell = document.createElement("td");
+        studentCell.textContent = task.student;
+
+        const dateCell = document.createElement("td");
+        dateCell.textContent = task.date;
+
+        // Create status dropdown
+        const statusCell = document.createElement("td");
+        const statusSelect = document.createElement("select");
+
+        statusSelect.className = "status-select";
+        statusSelect.dataset.id = task.id;
+
+        const statuses = ["Pending", "In Progress", "Completed"];
+
+        statuses.forEach(function(status) {
+            const option = document.createElement("option");
+            option.value = status;
+            option.textContent = status;
+
+            if (task.status === status) {
+                option.selected = true;
+            }
+
+            statusSelect.appendChild(option);
+        });
+
+        statusCell.appendChild(statusSelect);
+
+        const descriptionCell = document.createElement("td");
+        descriptionCell.textContent = task.description || "-";
+
+        // Create Edit button
+        const actionCell = document.createElement("td");
+
+        const editButton = document.createElement("button");
+        editButton.textContent = "Edit";
+        editButton.className = "edit-btn";
+        editButton.dataset.action = "edit";
+        editButton.dataset.id = task.id;
+
+        // Create Delete button
+        const deleteButton = document.createElement("button");
+        deleteButton.textContent = "Delete";
+        deleteButton.className = "delete-btn";
+        deleteButton.dataset.action = "delete";
+        deleteButton.dataset.id = task.id;
+
+        actionCell.appendChild(editButton);
+        actionCell.appendChild(deleteButton);
+
+        // Add all cells to the row
+        row.appendChild(titleCell);
+        row.appendChild(experimentCell);
+        row.appendChild(studentCell);
+        row.appendChild(dateCell);
+        row.appendChild(statusCell);
+        row.appendChild(descriptionCell);
+        row.appendChild(actionCell);
+
+        taskTableBody.appendChild(row);
+    });
+}
+
+// Add or update a task
+taskForm.addEventListener("submit", function(event) {
+
+    event.preventDefault();
+
+    const title = document.getElementById("taskTitle").value.trim();
+    const experiment = document.getElementById("taskExperiment").value;
+    const student = document.getElementById("taskStudent").value.trim();
+    const date = document.getElementById("taskDate").value;
+    const status = document.getElementById("taskStatus").value;
+    const description = document.getElementById("taskDescription").value.trim();
+
+    if (editingId === null) {
+
+        // CREATE operation
+        const newTask = {
+            id: Date.now(),
+            title: title,
+            experiment: experiment,
+            student: student,
+            date: date,
+            status: status,
+            description: description
+        };
+
+        tasks.push(newTask);
+
+        message.textContent = "Task added successfully!";
+
+    } else {
+
+        // UPDATE operation
+        const task = tasks.find(function(item) {
+            return item.id === editingId;
+        });
+
+        if (task) {
+            task.title = title;
+            task.experiment = experiment;
+            task.student = student;
+            task.date = date;
+            task.status = status;
+            task.description = description;
+        }
+
+        message.textContent = "Task updated successfully!";
+    }
+
+    saveTasks();
+    displayTasks();
+    resetTaskForm();
+});
+
+// Edit or delete a task
+taskTableBody.addEventListener("click", function(event) {
+
+    const id = Number(event.target.dataset.id);
+    const action = event.target.dataset.action;
+
+    if (!id || !action) {
+        return;
+    }
+
+    // Find the selected task
+    const selectedTask = tasks.find(function(task) {
+        return task.id === id;
+    });
+
+    if (!selectedTask) {
+        return;
+    }
+
+    if (action === "edit") {
+
+        // Fill the form with existing task details
+        document.getElementById("taskTitle").value = selectedTask.title;
+        document.getElementById("taskExperiment").value = selectedTask.experiment;
+        document.getElementById("taskStudent").value = selectedTask.student;
+        document.getElementById("taskDate").value = selectedTask.date;
+        document.getElementById("taskStatus").value = selectedTask.status;
+        document.getElementById("taskDescription").value = selectedTask.description;
+
+        editingId = id;
+
+        saveButton.textContent = "Update Task";
+        cancelButton.style.display = "inline-block";
+
+        message.textContent = "Edit the task details and click Update Task.";
+
+    }
+
+    if (action === "delete") {
+
+        // DELETE operation using filter()
+        tasks = tasks.filter(function(task) {
+            return task.id !== id;
+        });
+
+        saveTasks();
+        displayTasks();
+
+        message.textContent = "Task deleted successfully!";
+
+        if (editingId === id) {
+            resetTaskForm();
+        }
+    }
+});
+
+// Update task status
+taskTableBody.addEventListener("change", function(event) {
+
+    if (event.target.classList.contains("status-select")) {
+
+        const id = Number(event.target.dataset.id);
+
+        const task = tasks.find(function(item) {
+            return item.id === id;
+        });
+
+        if (task) {
+            task.status = event.target.value;
+
+            saveTasks();
+
+            message.textContent = "Task status updated successfully!";
+        }
+    }
+});
+
+// Reset task form
+function resetTaskForm() {
+
+    taskForm.reset();
+
+    editingId = null;
+
+    saveButton.textContent = "Add Task";
+    cancelButton.style.display = "none";
+}
+
+// Cancel editing
+cancelButton.addEventListener("click", function() {
+
+    resetTaskForm();
+
+    message.textContent = "Editing cancelled.";
+});
+
+// Student details form
+document.getElementById("studentForm").addEventListener("submit", function(event) {
+
+    event.preventDefault();
+
+    const name = document.getElementById("studentName").value;
+    const register = document.getElementById("registerNo").value;
+
+    document.getElementById("studentMessage").textContent =
+        "Thank you, " + name + "! Your details have been submitted. Register Number: " + register;
+
+    this.reset();
+});
+
+// Display previously saved tasks when the webpage opens
+displayTasks();
+
+</script>
+
+</body>
+</html>

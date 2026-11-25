@@ -1,0 +1,450 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Virtual Engineering Laboratory</title>
+
+<style>
+
+/* GENERAL STYLING */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f1f5f9;
+    color: #222;
+    line-height: 1.6;
+}
+
+/* 1. STATIC POSITIONING */
+.static-header {
+    position: static;
+    background-color: #075985;
+    color: white;
+    text-align: center;
+    padding: 15px;
+}
+
+/* 2. STICKY POSITIONING */
+nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background-color: #102a43;
+    padding: 15px;
+    text-align: center;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin: 0 15px;
+    font-weight: bold;
+}
+
+nav a:hover {
+    color: #38bdf8;
+}
+
+/* HERO SECTION */
+.hero {
+    background: linear-gradient(120deg, #075985, #10234a);
+    color: white;
+    text-align: center;
+    padding: 50px 20px;
+}
+
+/* COMMON SECTIONS */
+section {
+    padding: 35px 6%;
+    margin: 15px;
+}
+
+h2 {
+    text-align: center;
+    color: #075985;
+    margin-bottom: 20px;
+}
+
+/* EXPERIMENT LIST */
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.card {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    flex: 1 1 250px;
+    box-shadow: 0 3px 10px #00000015;
+}
+
+.card h3 {
+    color: #0369a1;
+    margin-bottom: 10px;
+}
+
+/* 3. RELATIVE POSITIONING */
+.relative-box {
+    position: relative;
+    left: 15px;
+    background-color: #dbeafe;
+    padding: 20px;
+    margin: 15px 0;
+    border-left: 5px solid #0284c7;
+}
+
+/* 4. ABSOLUTE POSITIONING */
+.equipment-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.equipment {
+    position: relative;
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    flex: 1 1 230px;
+    text-align: center;
+}
+
+.equipment img {
+    width: 100%;
+    height: 170px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.image-label {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color: #075985;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+/* VIDEO SECTION */
+.video-container {
+    text-align: center;
+}
+
+iframe {
+    width: 100%;
+    max-width: 650px;
+    height: 350px;
+    border: none;
+    border-radius: 10px;
+}
+
+/* STUDENT FORM */
+.form-container {
+    background: white;
+    max-width: 550px;
+    margin: auto;
+    padding: 25px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+input, select, textarea {
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+    font-size: 15px;
+}
+
+button {
+    background-color: #0369a1;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #075985;
+}
+
+/* 5. FIXED POSITIONING */
+.fixed-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #075985;
+    color: white;
+    padding: 12px 18px;
+    border-radius: 25px;
+    text-decoration: none;
+    z-index: 200;
+}
+
+/* FOOTER */
+footer {
+    background-color: #102a43;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+/* RESPONSIVE DESIGN */
+@media (max-width: 768px) {
+
+    nav a {
+        display: inline-block;
+        margin: 5px;
+    }
+
+    .card-container,
+    .equipment-container {
+        flex-direction: column;
+    }
+
+    iframe {
+        height: 250px;
+    }
+
+    .relative-box {
+        left: 0;
+    }
+}
+
+@media (max-width: 480px) {
+
+    nav a {
+        display: block;
+        margin: 8px;
+    }
+
+    .hero h1 {
+        font-size: 24px;
+    }
+
+    section {
+        padding: 20px 4%;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- STATIC POSITIONING -->
+<header class="static-header">
+    <h1>Engineering Virtual Laboratory</h1>
+    <p>Online Practical Learning Platform</p>
+</header>
+
+<!-- STICKY NAVIGATION -->
+<nav>
+    <a href="#home">Home</a>
+    <a href="#experiments">Experiments</a>
+    <a href="#objectives">Objectives</a>
+    <a href="#procedure">Procedure</a>
+    <a href="#equipment">Equipment</a>
+    <a href="#video">Video</a>
+    <a href="#student">Student Form</a>
+</nav>
+
+<!-- HOME -->
+<div class="hero" id="home">
+    <h1>Welcome to Virtual Laboratory</h1>
+    <p>Learn, Explore and Perform Engineering Experiments Online</p>
+</div>
+
+<!-- EXPERIMENT LIST -->
+<section id="experiments">
+    <h2>Experiment List</h2>
+
+    <div class="card-container">
+
+        <div class="card">
+            <h3>Experiment 1: Ohm's Law</h3>
+            <p>Study the relationship between voltage, current and resistance.</p>
+        </div>
+
+        <div class="card">
+            <h3>Experiment 2: Logic Gates</h3>
+            <p>Understand AND, OR, NOT, NAND and NOR logic gates.</p>
+        </div>
+
+        <div class="card">
+            <h3>Experiment 3: LED Circuit</h3>
+            <p>Study the working principle of LED and electronic circuits.</p>
+        </div>
+
+    </div>
+</section>
+
+<!-- OBJECTIVES -->
+<section id="objectives">
+    <h2>Laboratory Objectives</h2>
+
+    <div class="card">
+        <ul>
+            <li>Understand engineering concepts practically.</li>
+            <li>Develop technical and problem-solving skills.</li>
+            <li>Perform experiments in a virtual environment.</li>
+            <li>Understand laboratory equipment.</li>
+            <li>Improve experimental knowledge.</li>
+        </ul>
+    </div>
+</section>
+
+<!-- PROCEDURE -->
+<section id="procedure">
+    <h2>Experiment Procedure</h2>
+
+    <!-- RELATIVE POSITIONING -->
+    <div class="relative-box">
+        <h3>Relative Positioning Example</h3>
+        <p>This box uses position: relative and is shifted 15px to the right.</p>
+    </div>
+
+    <div class="card">
+        <ol>
+            <li>Select an experiment from the experiment list.</li>
+            <li>Read the experiment objectives.</li>
+            <li>Identify the required equipment.</li>
+            <li>Watch the instructional video.</li>
+            <li>Follow the experiment steps.</li>
+            <li>Record observations and results.</li>
+        </ol>
+    </div>
+</section>
+
+<!-- EQUIPMENT IMAGES -->
+<section id="equipment">
+    <h2>Laboratory Equipment</h2>
+
+    <div class="equipment-container">
+
+        <div class="equipment">
+
+            <!-- ABSOLUTE POSITIONING -->
+            <span class="image-label">Equipment 1</span>
+
+            <img src="resistor image.webp"
+                 alt="Resistor">
+
+            <h3>Resistor</h3>
+            <p>Used to control current flow in a circuit.</p>
+        </div>
+
+        <div class="equipment">
+
+            <span class="image-label">Equipment 2</span>
+
+            <img src="multi meter image.webp"
+                 alt="Multimeter">
+
+            <h3>Multimeter</h3>
+            <p>Used to measure voltage, current and resistance.</p>
+        </div>
+
+        <div class="equipment">
+
+            <span class="image-label">Equipment 3</span>
+
+            <img src="breadboard image.jpg"
+                 alt="Breadboard">
+
+            <h3>Breadboard</h3>
+            <p>Used to build and test electronic circuits.</p>
+        </div>
+
+    </div>
+</section>
+
+<!-- INSTRUCTIONAL VIDEO -->
+<section id="video">
+    <h2>Instructional Video</h2>
+
+    <div class="video-container">
+
+        <iframe
+            src="https://www.youtube.com/embed/mc979OhitAg"
+            title="Basic Electronics Tutorial"
+            allowfullscreen>
+        </iframe>
+
+    </div>
+</section>
+
+<!-- STUDENT DETAILS FORM -->
+<section id="student">
+    <h2>Student Details Form</h2>
+
+    <form class="form-container" onsubmit="submitForm(event)">
+
+        <input type="text"
+               placeholder="Enter Student Name" required>
+
+        <input type="text"
+               placeholder="Enter Register Number" required>
+
+        <input type="email"
+               placeholder="Enter Email Address" required>
+
+        <input type="text"
+               placeholder="Enter Department" required>
+
+        <select required>
+            <option value="">Select Year</option>
+            <option>First Year</option>
+            <option>Second Year</option>
+            <option>Third Year</option>
+            <option>Fourth Year</option>
+        </select>
+
+        <select required>
+            <option value="">Select Experiment</option>
+            <option>Ohm's Law</option>
+            <option>Logic Gates</option>
+            <option>LED Circuit</option>
+        </select>
+
+        <textarea placeholder="Enter Feedback"></textarea>
+
+        <button type="submit">Submit Details</button>
+
+    </form>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <p>© 2026 Engineering Virtual Laboratory</p>
+    <p>Designed for Engineering Students</p>
+</footer>
+
+<!-- FIXED POSITIONING -->
+<a href="#home" class="fixed-button">Back to Top ↑</a>
+
+<script>
+function submitForm(event) {
+    event.preventDefault();
+    alert("Student details submitted successfully!");
+}
+</script>
+
+</body>
+</html>

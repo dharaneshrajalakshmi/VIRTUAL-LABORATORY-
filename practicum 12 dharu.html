@@ -1,0 +1,801 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Engineering Virtual Laboratory</title>
+
+<style>
+
+/* GENERAL STYLING */
+
+* {
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    margin: 0;
+    background: #f1f5f9;
+    color: #1e293b;
+}
+
+/* HEADER */
+
+header {
+    background: #12346b;
+    color: white;
+    text-align: center;
+    padding: 30px;
+}
+
+header h1 {
+    margin: 0;
+}
+
+header p {
+    margin-top: 10px;
+}
+
+/* NAVIGATION */
+
+nav {
+    background: #1e293b;
+    padding: 15px;
+    text-align: center;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin: 12px;
+}
+
+/* SECTION */
+
+section {
+    background: white;
+    width: 90%;
+    margin: 25px auto;
+    padding: 25px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+}
+
+h2 {
+    color: #12346b;
+}
+
+/* EXPERIMENT GRID */
+
+.experiment-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.experiment-card {
+    background: #eff6ff;
+    border: 1px solid #bfdbfe;
+    padding: 20px;
+    margin: 5px;
+    border-radius: 10px;
+}
+
+.experiment-card h3 {
+    color: #1e40af;
+}
+
+/* TABLE STYLING */
+
+.table-container {
+    width: 100%;
+    overflow-x: auto;
+    margin-top: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 650px;
+}
+
+th, td {
+    border: 1px solid #cbd5e1;
+    padding: 12px;
+    text-align: left;
+}
+
+thead {
+    background: #12346b;
+    color: white;
+}
+
+tbody tr:nth-child(even) {
+    background: #eff6ff;
+}
+
+/* BUTTON */
+
+button {
+    background: #2563eb;
+    color: white;
+    padding: 11px 18px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 8px 5px 8px 0;
+}
+
+button:hover {
+    background: #1e40af;
+}
+
+/* EQUIPMENT */
+
+.equipment-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.equipment-container div {
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin: 5px;
+    text-align: center;
+    border-radius: 8px;
+}
+
+.equipment-container img {
+    width: 220px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+/* VIDEO */
+
+iframe {
+    width: 100%;
+    max-width: 650px;
+    height: 350px;
+    border: none;
+    border-radius: 10px;
+}
+
+/* STUDENT FORM */
+
+form {
+    max-width: 500px;
+    display: grid;
+    gap: 12px;
+}
+
+input, select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #94a3b8;
+    border-radius: 5px;
+}
+
+/* API STATUS */
+
+#loading {
+    display: none;
+    color: #2563eb;
+    padding: 15px;
+    font-weight: bold;
+}
+
+#error {
+    display: none;
+    color: #dc2626;
+    background: #fee2e2;
+    padding: 15px;
+    border-radius: 5px;
+}
+
+#success {
+    display: none;
+    color: #166534;
+    background: #dcfce7;
+    padding: 15px;
+    border-radius: 5px;
+}
+
+/* FOOTER */
+
+footer {
+    background: #12346b;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+
+<header>
+
+    <h1>ENGINEERING VIRTUAL LABORATORY</h1>
+
+    <p>Learn | Experiment | Explore | Innovate</p>
+
+</header>
+
+
+<!-- NAVIGATION -->
+
+<nav>
+
+    <a href="#home">Home</a>
+
+    <a href="#experiments">Experiments</a>
+
+    <a href="#api">API Data</a>
+
+    <a href="#equipment">Equipment</a>
+
+    <a href="#video">Video</a>
+
+    <a href="#student">Student Form</a>
+
+</nav>
+
+
+<!-- HOME SECTION -->
+
+<section id="home">
+
+    <h2>Welcome to Virtual Laboratory</h2>
+
+    <p>
+        The Engineering Virtual Laboratory is an online learning
+        platform designed for engineering students.
+
+        It provides experiment information, objectives, procedures,
+        equipment images and instructional videos.
+
+        Students can understand practical engineering concepts
+        through digital learning.
+    </p>
+
+</section>
+
+
+<!-- EXPERIMENT SECTION -->
+
+<section id="experiments">
+
+    <h2>Engineering Experiments</h2>
+
+    <div class="experiment-container">
+
+        <div class="experiment-card">
+
+            <h3>Ohm's Law</h3>
+
+            <p><b>Objective:</b></p>
+
+            <p>
+                To verify Ohm's Law and calculate electrical resistance.
+            </p>
+
+            <p><b>Procedure:</b></p>
+
+            <p>
+                Connect the circuit, apply different voltage values,
+                measure the current and calculate resistance using V/I.
+            </p>
+
+        </div>
+
+
+        <div class="experiment-card">
+
+            <h3>Logic Gates</h3>
+
+            <p><b>Objective:</b></p>
+
+            <p>
+                To study AND, OR and NOT logic gates.
+            </p>
+
+            <p><b>Procedure:</b></p>
+
+            <p>
+                Connect the logic circuit, apply input combinations,
+                observe outputs and verify the truth table.
+            </p>
+
+        </div>
+
+
+        <div class="experiment-card">
+
+            <h3>DC Motor</h3>
+
+            <p><b>Objective:</b></p>
+
+            <p>
+                To understand the working principle of a DC motor.
+            </p>
+
+            <p><b>Procedure:</b></p>
+
+            <p>
+                Identify motor terminals, connect the DC supply,
+                switch on the power and observe rotation.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- API INTEGRATION SECTION -->
+
+<section id="api">
+
+    <h2>Live Experiment Information - API Integration</h2>
+
+    <p>
+        Experiment information is retrieved from an external API
+        and displayed dynamically below.
+    </p>
+
+    <button id="loadButton">
+        Load Experiment Data
+    </button>
+
+    <button id="refreshButton">
+        Refresh Data
+    </button>
+
+    <!-- LOADING MESSAGE -->
+
+    <div id="loading">
+        Loading experiment information... Please wait.
+    </div>
+
+    <!-- ERROR MESSAGE -->
+
+    <div id="error"></div>
+
+    <!-- API EXPERIMENT CARDS -->
+
+    <h3>Experiment Information Cards</h3>
+
+    <div class="experiment-container" id="experimentCards">
+
+    </div>
+
+    <!-- API DATA TABLE -->
+
+    <h3>Experiment Details Table</h3>
+
+    <div class="table-container">
+
+        <table>
+
+            <thead>
+
+                <tr>
+                    <th>Experiment ID</th>
+                    <th>Experiment Name</th>
+                    <th>Objective / Description</th>
+                    <th>Procedure</th>
+                </tr>
+
+            </thead>
+
+            <tbody id="experimentTable">
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</section>
+
+
+<!-- EQUIPMENT SECTION -->
+
+<section id="equipment">
+
+    <h2>Laboratory Equipment</h2>
+
+    <div class="equipment-container">
+
+        <div>
+
+            <img
+            src="multi meter image.webp"
+            alt="Digital Multimeter">
+
+            <p><b>Digital Multimeter</b></p>
+
+        </div>
+
+
+        <div>
+
+            <img
+            src="oscilloscope.jpg"
+            alt="Oscilloscope">
+
+            <p><b>Oscilloscope</b></p>
+
+        </div>
+
+
+        <div>
+
+            <img
+            src="dc motor.jpg"
+            alt="DC Motor">
+
+            <p><b>DC Motor</b></p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- VIDEO SECTION -->
+
+<section id="video">
+
+    <h2>Instructional Video</h2>
+
+    <p>
+        Watch an instructional video to understand
+        virtual laboratory experiments.
+    </p>
+
+    <br>
+
+    <iframe
+        src="https://www.youtube-nocookie.com/embed/AJsDwJ2ndng"
+        title="Engineering Virtual Laboratory Tutorial"
+        allowfullscreen>
+    </iframe>
+
+</section>
+
+
+<!-- STUDENT DETAILS FORM -->
+
+<section id="student">
+
+    <h2>Student Details Form</h2>
+
+    <form id="studentForm">
+
+        <input
+            type="text"
+            id="studentName"
+            placeholder="Enter Student Name"
+            required>
+
+        <input
+            type="text"
+            id="registerNumber"
+            placeholder="Enter Register Number"
+            required>
+
+        <input
+            type="email"
+            id="studentEmail"
+            placeholder="Enter Email Address"
+            required>
+
+        <select id="department" required>
+
+            <option value="">Select Department</option>
+
+            <option>Computer Science Engineering</option>
+
+            <option>Electronics and Communication</option>
+
+            <option>Electrical Engineering</option>
+
+            <option>Mechanical Engineering</option>
+
+            <option>Civil Engineering</option>
+
+        </select>
+
+        <button type="submit">
+            Submit Details
+        </button>
+
+    </form>
+
+    <div id="success"></div>
+
+</section>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+    <p>© 2026 Engineering Virtual Laboratory</p>
+
+    <p>Designed for Engineering Students</p>
+
+</footer>
+
+
+<!-- JAVASCRIPT API INTEGRATION -->
+
+<script>
+
+// API ENDPOINT
+
+const API_URL =
+"https://jsonplaceholder.typicode.com/posts?_limit=5";
+
+
+// GET HTML ELEMENTS
+
+const loadButton = document.getElementById("loadButton");
+
+const refreshButton = document.getElementById("refreshButton");
+
+const loading = document.getElementById("loading");
+
+const error = document.getElementById("error");
+
+const experimentCards =
+document.getElementById("experimentCards");
+
+const experimentTable =
+document.getElementById("experimentTable");
+
+
+// ASYNC FUNCTION TO FETCH API DATA
+
+async function fetchExperiments() {
+
+    // SHOW LOADING MESSAGE
+
+    loading.style.display = "block";
+
+    error.style.display = "none";
+
+    experimentCards.innerHTML = "";
+
+    experimentTable.innerHTML = "";
+
+
+    try {
+
+        // FETCH DATA FROM API
+
+        const response = await fetch(API_URL);
+
+
+        // CHECK RESPONSE
+
+        if(!response.ok) {
+
+            throw new Error("Unable to fetch experiment data.");
+
+        }
+
+
+        // CONVERT RESPONSE INTO JSON
+
+        const data = await response.json();
+
+
+        // CHECK WHETHER DATA IS AVAILABLE
+
+        if(data.length === 0) {
+
+            throw new Error("No experiment information available.");
+
+        }
+
+
+        // DISPLAY API DATA DYNAMICALLY
+
+        data.forEach(function(item) {
+
+
+            // CREATE EXPERIMENT CARD
+
+            const card = document.createElement("div");
+
+            card.className = "experiment-card";
+
+
+            // CREATE HEADING
+
+            const heading = document.createElement("h3");
+
+            heading.textContent =
+                "Experiment " + item.id + ": " + item.title;
+
+
+            // CREATE OBJECTIVE
+
+            const objective = document.createElement("p");
+
+            objective.textContent =
+                "Objective: " + item.body;
+
+
+            // CREATE PROCEDURE
+
+            const procedure = document.createElement("p");
+
+            procedure.textContent =
+                "Procedure: Study the information, identify the key points, " +
+                "and verify the experimental concept.";
+
+
+            // ADD ELEMENTS TO CARD
+
+            card.appendChild(heading);
+
+            card.appendChild(objective);
+
+            card.appendChild(procedure);
+
+
+            // ADD CARD TO WEBPAGE
+
+            experimentCards.appendChild(card);
+
+
+            // CREATE TABLE ROW
+
+            const row = document.createElement("tr");
+
+
+            // CREATE TABLE CELLS
+
+            const idCell = document.createElement("td");
+
+            const nameCell = document.createElement("td");
+
+            const objectiveCell = document.createElement("td");
+
+            const procedureCell = document.createElement("td");
+
+
+            // INSERT API DATA
+
+            idCell.textContent = item.id;
+
+            nameCell.textContent = item.title;
+
+            objectiveCell.textContent = item.body;
+
+            procedureCell.textContent =
+                "Study and verify the experimental concept.";
+
+
+            // ADD CELLS TO ROW
+
+            row.appendChild(idCell);
+
+            row.appendChild(nameCell);
+
+            row.appendChild(objectiveCell);
+
+            row.appendChild(procedureCell);
+
+
+            // ADD ROW TO TABLE
+
+            experimentTable.appendChild(row);
+
+        });
+
+
+    }
+
+    // HANDLE API ERRORS
+
+    catch(err) {
+
+        error.style.display = "block";
+
+        error.textContent =
+            "Error: " + err.message +
+            " Please check your internet connection and try again.";
+
+    }
+
+
+    // ALWAYS EXECUTES
+
+    finally {
+
+        loading.style.display = "none";
+
+    }
+
+}
+
+
+// LOAD BUTTON EVENT
+
+loadButton.addEventListener("click", fetchExperiments);
+
+
+// REFRESH BUTTON EVENT
+
+refreshButton.addEventListener("click", fetchExperiments);
+
+
+// AUTOMATICALLY LOAD API DATA WHEN PAGE OPENS
+
+fetchExperiments();
+
+
+// STUDENT FORM SUBMISSION
+
+const studentForm = document.getElementById("studentForm");
+
+studentForm.addEventListener("submit", function(event) {
+
+    event.preventDefault();
+
+
+    // GET STUDENT DETAILS
+
+    const name =
+        document.getElementById("studentName").value;
+
+    const register =
+        document.getElementById("registerNumber").value;
+
+    const email =
+        document.getElementById("studentEmail").value;
+
+    const department =
+        document.getElementById("department").value;
+
+
+    // DISPLAY SUCCESS MESSAGE
+
+    const success = document.getElementById("success");
+
+    success.style.display = "block";
+
+    success.textContent =
+        "Registration Successful! " +
+        "Name: " + name +
+        " | Register Number: " + register +
+        " | Email: " + email +
+        " | Department: " + department;
+
+
+    // CLEAR FORM
+
+    studentForm.reset();
+
+});
+
+</script>
+
+</body>
+</html>

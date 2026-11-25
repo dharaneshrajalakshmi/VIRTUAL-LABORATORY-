@@ -1,0 +1,966 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Engineering Virtual Laboratory</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f1f5f9;
+            color: #263445;
+        }
+
+        /* HEADER */
+
+        header {
+            background: #12345a;
+            color: white;
+            text-align: center;
+            padding: 25px;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        /* NAVIGATION */
+
+        nav {
+            background: #1d4e89;
+            padding: 15px;
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            color: #ffdb70;
+        }
+
+        /* GENERAL SECTIONS */
+
+        section {
+            background: white;
+            max-width: 1100px;
+            margin: 25px auto;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px #d5dce5;
+        }
+
+        h2 {
+            color: #12345a;
+            border-bottom: 2px solid #1d4e89;
+            padding-bottom: 10px;
+        }
+
+        /* EXPERIMENT CARDS */
+
+        .experiment-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .experiment-card {
+            flex: 1;
+            min-width: 230px;
+            border: 1px solid #ccd6e2;
+            border-radius: 8px;
+            padding: 15px;
+            background: #f8fbff;
+            transition: 0.3s;
+        }
+
+        .experiment-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 12px #cbd5e1;
+        }
+
+        .experiment-card img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 6px;
+        }
+
+        .experiment-card h3 {
+            color: #1d4e89;
+        }
+
+        /* CUSTOM TOGGLE SWITCH */
+
+        .setting-box {
+            background: #f1f6ff;
+            border: 1px solid #cbdcf2;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 15px;
+        }
+
+        .toggle-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 15px;
+        }
+
+        .toggle-label {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        /* Hide the original checkbox */
+
+        .toggle-input {
+            appearance: none;
+            -webkit-appearance: none;
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            opacity: 0;
+        }
+
+        /* Toggle switch background */
+
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 32px;
+            border-radius: 30px;
+            background: #9ca3af;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        /* Toggle switch circle */
+
+        .toggle-switch::before {
+            content: "";
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            left: 4px;
+            top: 4px;
+            border-radius: 50%;
+            background: white;
+            transition: 0.3s;
+        }
+
+        /* When checkbox is checked */
+
+        .toggle-input:checked + .toggle-switch {
+            background: #16a34a;
+        }
+
+        .toggle-input:checked + .toggle-switch::before {
+            transform: translateX(28px);
+        }
+
+        .toggle-input:focus-visible + .toggle-switch {
+            outline: 3px solid #60a5fa;
+            outline-offset: 3px;
+        }
+
+        .toggle-status {
+            font-weight: bold;
+            color: #b45309;
+        }
+
+        .toggle-input:checked ~ .toggle-status {
+            color: #15803d;
+        }
+
+        /* SAFETY MESSAGE */
+
+        .safety-message {
+            display: none;
+            background: #fff4e5;
+            border: 1px solid #f0ad4e;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 18px;
+        }
+
+        .safety-message.active {
+            display: block;
+        }
+
+        .safety-message p {
+            line-height: 1.6;
+        }
+
+        .safety-check {
+            display: none;
+            margin-top: 15px;
+        }
+
+        .safety-check.active {
+            display: block;
+        }
+
+        .safety-check label {
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        /* BUTTONS */
+
+        button {
+            background: #1d4e89;
+            color: white;
+            border: none;
+            padding: 12px 18px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 12px;
+        }
+
+        button:hover {
+            background: #12345a;
+            transform: scale(1.03);
+        }
+
+        button:disabled {
+            background: #9ca3af;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* EXPERIMENT STATUS */
+
+        #experimentStatus {
+            font-weight: bold;
+            margin-top: 15px;
+        }
+
+        /* EQUIPMENT */
+
+        .equipment-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .equipment-card {
+            flex: 1;
+            min-width: 200px;
+            text-align: center;
+        }
+
+        .equipment-card img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        /* PROCEDURE */
+
+        .procedure-box {
+            background: #f8fbff;
+            border-left: 4px solid #1d4e89;
+            padding: 15px;
+            margin: 12px 0;
+            line-height: 1.7;
+        }
+
+        /* VIDEO */
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%;
+            height: 0;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* STUDENT FORM */
+
+        .student-form {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .student-form input,
+        .student-form select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #b8c5d4;
+            border-radius: 5px;
+            font-size: 15px;
+        }
+
+        .student-form input:focus,
+        .student-form select:focus {
+            outline: 2px solid #60a5fa;
+        }
+
+        #studentMessage {
+            color: green;
+            font-weight: bold;
+        }
+
+        /* FOOTER */
+
+        footer {
+            background: #12345a;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        @media(max-width: 600px) {
+
+            section {
+                margin: 12px;
+                padding: 15px;
+            }
+
+            .toggle-container {
+                align-items: flex-start;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <!-- HEADER -->
+
+    <header>
+        <h1>ENGINEERING VIRTUAL LABORATORY</h1>
+        <p>Learn | Experiment | Explore | Achieve</p>
+    </header>
+
+    <!-- NAVIGATION -->
+
+    <nav>
+        <a href="#experiments">Experiments</a>
+        <a href="#settings">Safety Settings</a>
+        <a href="#objectives">Objectives</a>
+        <a href="#equipment">Equipment</a>
+        <a href="#video">Video</a>
+        <a href="#student">Student Form</a>
+    </nav>
+
+    <!-- EXPERIMENT LIST -->
+
+    <section id="experiments">
+
+        <h2>Available Experiments</h2>
+
+        <div class="experiment-container">
+
+            <div class="experiment-card">
+
+                <img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=600"
+                     alt="Electrical laboratory">
+
+                <h3>1. Ohm's Law Experiment</h3>
+
+                <p>
+                    Study the relationship between voltage,
+                    current and resistance.
+                </p>
+
+            </div>
+
+            <div class="experiment-card">
+
+                <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=600"
+                     alt="Electronic circuit">
+
+                <h3>2. Logic Gates Experiment</h3>
+
+                <p>
+                    Understand the operation of AND,
+                    OR and NOT gates.
+                </p>
+
+            </div>
+
+            <div class="experiment-card">
+
+                <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=600"
+                     alt="Mechanical equipment">
+
+                <h3>3. DC Motor Experiment</h3>
+
+                <p>
+                    Understand the working principle
+                    of a DC motor.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- CUSTOM TOGGLE SETTING -->
+
+    <section id="settings">
+
+        <h2>Laboratory Application Settings</h2>
+
+        <div class="setting-box">
+
+            <h3>Electrical Lab Safety Mode</h3>
+
+            <p>
+                Enable this setting to activate additional
+                electrical laboratory safety instructions.
+            </p>
+
+            <div class="toggle-container">
+
+                <label class="toggle-label" for="safetyToggle">
+
+                    <input
+                        type="checkbox"
+                        id="safetyToggle"
+                        class="toggle-input">
+
+                    <span class="toggle-switch"></span>
+
+                    <span>Enable Safety Mode</span>
+
+                    <span class="toggle-status" id="toggleStatus">
+                        OFF
+                    </span>
+
+                </label>
+
+            </div>
+
+            <!-- SAFETY INSTRUCTIONS -->
+
+            <div class="safety-message" id="safetyMessage">
+
+                <h3>Electrical Safety Instructions</h3>
+
+                <p>
+                    1. Check all electrical connections before starting.
+                </p>
+
+                <p>
+                    2. Never touch exposed electrical wires.
+                </p>
+
+                <p>
+                    3. Switch off the power supply before changing connections.
+                </p>
+
+                <p>
+                    4. Use suitable protective equipment and follow
+                    your institution's laboratory instructions.
+                </p>
+
+            </div>
+
+            <!-- SAFETY CONFIRMATION -->
+
+            <div class="safety-check" id="safetyCheck">
+
+                <label>
+                    <input type="checkbox" id="confirmSafety">
+
+                    I have read and understood the safety instructions.
+                </label>
+
+            </div>
+
+        </div>
+
+        <!-- EXPERIMENT START -->
+
+        <h3>Start Laboratory Experiment</h3>
+
+        <p>
+            Click the button below to start the Ohm's Law experiment.
+        </p>
+
+        <button id="startExperiment" type="button">
+            Start Experiment
+        </button>
+
+        <p id="experimentStatus">
+            Experiment is not started.
+        </p>
+
+    </section>
+
+
+    <!-- OBJECTIVES -->
+
+    <section id="objectives">
+
+        <h2>Experiment Objectives</h2>
+
+        <div class="procedure-box">
+
+            <h3>Ohm's Law Experiment</h3>
+
+            <p>
+                To verify the relationship between voltage,
+                current and resistance using Ohm's Law.
+            </p>
+
+            <h3>Procedure</h3>
+
+            <p>
+                1. Connect the resistor to the power supply.
+            </p>
+
+            <p>
+                2. Measure the voltage using a voltmeter.
+            </p>
+
+            <p>
+                3. Measure the current using an ammeter.
+            </p>
+
+            <p>
+                4. Calculate resistance using V = IR.
+            </p>
+
+            <p>
+                5. Compare the experimental results.
+            </p>
+
+        </div>
+
+        <div class="procedure-box">
+
+            <h3>Logic Gates Experiment</h3>
+
+            <p>
+                To understand the operation of basic digital logic gates.
+            </p>
+
+            <h3>Procedure</h3>
+
+            <p>
+                1. Select AND, OR and NOT gates.
+            </p>
+
+            <p>
+                2. Apply different input combinations.
+            </p>
+
+            <p>
+                3. Observe the output values.
+            </p>
+
+            <p>
+                4. Verify the truth tables.
+            </p>
+
+        </div>
+
+        <div class="procedure-box">
+
+            <h3>DC Motor Experiment</h3>
+
+            <p>
+                To study the working principle of a DC motor.
+            </p>
+
+            <h3>Procedure</h3>
+
+            <p>
+                1. Connect the motor to the power supply.
+            </p>
+
+            <p>
+                2. Switch on the power supply.
+            </p>
+
+            <p>
+                3. Observe the direction of rotation.
+            </p>
+
+            <p>
+                4. Study the effect of voltage changes.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- EQUIPMENT IMAGES -->
+
+    <section id="equipment">
+
+        <h2>Laboratory Equipment</h2>
+
+        <div class="equipment-container">
+
+            <div class="equipment-card">
+
+                <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=600"
+                     alt="Digital multimeter">
+
+                <p>Digital Multimeter</p>
+
+            </div>
+
+            <div class="equipment-card">
+
+                <img src="https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?w=600"
+                     alt="Electronic circuit board">
+
+                <p>Electronic Circuit Board</p>
+
+            </div>
+
+            <div class="equipment-card">
+
+                <img src="https://images.unsplash.com/photo-1581092795360-fd1ca04f0952?w=600"
+                     alt="Testing equipment">
+
+                <p>Testing Equipment</p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- INSTRUCTIONAL VIDEO -->
+
+    <section id="video">
+
+        <h2>Instructional Video</h2>
+
+        <p>
+            Watch the instructional video to understand laboratory experiments.
+        </p>
+
+        <div class="video-container">
+
+            <iframe
+                src="https://www.youtube-nocookie.com/embed/AJsDwJ2ndng"
+                title="Engineering Virtual Laboratory Video"
+                allowfullscreen>
+            </iframe>
+
+        </div>
+
+    </section>
+
+
+    <!-- STUDENT DETAILS FORM -->
+
+    <section id="student">
+
+        <h2>Student Details Form</h2>
+
+        <form class="student-form" id="studentForm">
+
+            <label for="studentName">Student Name</label>
+
+            <input
+                type="text"
+                id="studentName"
+                placeholder="Enter your name"
+                required>
+
+            <label for="registerNumber">Register Number</label>
+
+            <input
+                type="text"
+                id="registerNumber"
+                placeholder="Enter register number"
+                required>
+
+            <label for="email">Email Address</label>
+
+            <input
+                type="email"
+                id="email"
+                placeholder="Enter email address"
+                required>
+
+            <label for="department">Department</label>
+
+            <select id="department" required>
+
+                <option value="">Select Department</option>
+
+                <option>Computer Science Engineering</option>
+
+                <option>Electrical Engineering</option>
+
+                <option>Electronics Engineering</option>
+
+                <option>Mechanical Engineering</option>
+
+            </select>
+
+            <button type="submit">
+                Submit Details
+            </button>
+
+        </form>
+
+        <p id="studentMessage"></p>
+
+    </section>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <h3>Engineering Virtual Laboratory</h3>
+
+        <p>Learn | Practice | Innovate</p>
+
+        <p>Designed for Engineering Students</p>
+
+    </footer>
+
+
+    <!-- JAVASCRIPT -->
+
+    <script>
+
+        // GET HTML ELEMENTS
+
+        const safetyToggle =
+            document.getElementById("safetyToggle");
+
+        const toggleStatus =
+            document.getElementById("toggleStatus");
+
+        const safetyMessage =
+            document.getElementById("safetyMessage");
+
+        const safetyCheck =
+            document.getElementById("safetyCheck");
+
+        const confirmSafety =
+            document.getElementById("confirmSafety");
+
+        const startButton =
+            document.getElementById("startExperiment");
+
+        const experimentStatus =
+            document.getElementById("experimentStatus");
+
+
+        // LOAD SAVED SETTING FROM LOCAL STORAGE
+
+        const savedSetting =
+            localStorage.getItem("labSafetyMode");
+
+        // Restore the previously selected setting
+
+        if (savedSetting === "enabled") {
+
+            safetyToggle.checked = true;
+
+        } else {
+
+            safetyToggle.checked = false;
+
+        }
+
+
+        // FUNCTION TO UPDATE APPLICATION BEHAVIOUR
+
+        function updateSafetyMode() {
+
+            // Check whether toggle is ON or OFF
+
+            if (safetyToggle.checked) {
+
+                // Display ON status
+
+                toggleStatus.textContent = "ON";
+
+                // Show safety instructions
+
+                safetyMessage.classList.add("active");
+
+                // Show safety confirmation
+
+                safetyCheck.classList.add("active");
+
+                // Require safety confirmation
+
+                startButton.disabled = true;
+
+                experimentStatus.textContent =
+                    "Safety Mode is ON. Read the instructions and confirm before starting.";
+
+                // Save ON setting
+
+                localStorage.setItem(
+                    "labSafetyMode",
+                    "enabled"
+                );
+
+            } else {
+
+                // Display OFF status
+
+                toggleStatus.textContent = "OFF";
+
+                // Hide safety instructions
+
+                safetyMessage.classList.remove("active");
+
+                // Hide safety confirmation
+
+                safetyCheck.classList.remove("active");
+
+                // Reset confirmation
+
+                confirmSafety.checked = false;
+
+                // Allow experiment to start
+
+                startButton.disabled = false;
+
+                experimentStatus.textContent =
+                    "Safety Mode is OFF. Experiment is ready to start.";
+
+                // Save OFF setting
+
+                localStorage.setItem(
+                    "labSafetyMode",
+                    "disabled"
+                );
+
+            }
+
+        }
+
+
+        // TOGGLE SWITCH EVENT
+
+        safetyToggle.addEventListener("change", function() {
+
+            // Update application based on checkbox state
+
+            updateSafetyMode();
+
+        });
+
+
+        // SAFETY CONFIRMATION EVENT
+
+        confirmSafety.addEventListener("change", function() {
+
+            if (confirmSafety.checked && safetyToggle.checked) {
+
+                startButton.disabled = false;
+
+                experimentStatus.textContent =
+                    "Safety checklist confirmed. You can start the experiment.";
+
+            } else if (safetyToggle.checked) {
+
+                startButton.disabled = true;
+
+                experimentStatus.textContent =
+                    "Please confirm the safety checklist before starting.";
+
+            }
+
+        });
+
+
+        // START EXPERIMENT BUTTON
+
+        startButton.addEventListener("click", function() {
+
+            if (safetyToggle.checked && !confirmSafety.checked) {
+
+                experimentStatus.textContent =
+                    "Please complete the safety confirmation first.";
+
+                return;
+
+            }
+
+            experimentStatus.textContent =
+                "Ohm's Law Experiment Started Successfully!";
+
+        });
+
+
+        // RESTORE APPLICATION STATE WHEN PAGE LOADS
+
+        updateSafetyMode();
+
+
+        // STUDENT FORM SUBMISSION
+
+        document.getElementById("studentForm")
+        .addEventListener("submit", function(event) {
+
+            event.preventDefault();
+
+            const name =
+                document.getElementById("studentName").value;
+
+            const register =
+                document.getElementById("registerNumber").value;
+
+            document.getElementById("studentMessage").textContent =
+                "Thank you " + name +
+                "! Your details have been submitted successfully. " +
+                "Register Number: " + register;
+
+            this.reset();
+
+        });
+
+    </script>
+
+</body>
+</html>

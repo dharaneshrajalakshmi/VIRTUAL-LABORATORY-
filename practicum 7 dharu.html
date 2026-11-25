@@ -1,0 +1,487 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Engineering Virtual Laboratory</title>
+
+<style>
+
+/* GENERAL STYLING */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f1f5f9;
+    color: #222;
+    line-height: 1.6;
+}
+
+/* NAVIGATION BAR */
+nav {
+    background-color: #102a43;
+    padding: 18px;
+    text-align: center;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin: 15px;
+    font-weight: bold;
+}
+
+nav a:hover {
+    color: #38bdf8;
+}
+
+/* HEADER */
+header {
+    background: linear-gradient(120deg, #075985, #1b2a4a);
+    color: white;
+    text-align: center;
+    padding: 45px 20px;
+}
+
+header h1 {
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+/* COMMON SECTIONS */
+section {
+    padding: 35px 6%;
+}
+
+h2 {
+    text-align: center;
+    color: #075985;
+    margin-bottom: 25px;
+}
+
+/* EXPERIMENT LIST */
+.experiment-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.card {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px #00000015;
+}
+
+.card h3 {
+    color: #0369a1;
+    margin-bottom: 10px;
+}
+
+/* OBJECTIVES */
+.objectives {
+    background-color: white;
+    padding: 25px;
+    border-radius: 10px;
+}
+
+.objectives ul {
+    padding-left: 25px;
+}
+
+/* PROCEDURE */
+.procedure {
+    background-color: white;
+    padding: 25px;
+    border-radius: 10px;
+}
+
+.procedure ol {
+    padding-left: 25px;
+}
+
+/* CSS GRID IMAGE GALLERY */
+.gallery {
+    display: grid;
+
+    /* RESPONSIVE GRID COLUMNS */
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 20px;
+}
+
+/* GALLERY ITEMS */
+.gallery-item {
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 3px 10px #00000015;
+    text-align: center;
+    transition: transform 0.3s;
+}
+
+.gallery-item:hover {
+    transform: translateY(-5px);
+}
+
+/* CONSISTENT IMAGE DIMENSIONS */
+.gallery-item img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    display: block;
+}
+
+/* IMAGE CAPTIONS */
+.gallery-item figcaption {
+    padding: 15px;
+    font-weight: bold;
+    color: #075985;
+}
+
+/* INSTRUCTIONAL VIDEO */
+.video-container {
+    text-align: center;
+}
+
+iframe {
+    width: 100%;
+    max-width: 650px;
+    height: 350px;
+    border: none;
+    border-radius: 10px;
+}
+
+/* STUDENT DETAILS FORM */
+.form-container {
+    background-color: white;
+    max-width: 550px;
+    margin: auto;
+    padding: 25px;
+    border-radius: 10px;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 15px;
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 15px;
+}
+
+button {
+    background-color: #0369a1;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #075985;
+}
+
+/* FOOTER */
+footer {
+    background-color: #102a43;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+/* RESPONSIVE DESIGN */
+
+/* TABLET VIEW */
+@media (max-width: 900px) {
+
+    .experiment-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .gallery {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+/* MOBILE VIEW */
+@media (max-width: 600px) {
+
+    nav a {
+        display: inline-block;
+        margin: 7px;
+    }
+
+    header h1 {
+        font-size: 24px;
+    }
+
+    .experiment-container {
+        grid-template-columns: 1fr;
+    }
+
+    .gallery {
+        grid-template-columns: 1fr;
+    }
+
+    .gallery-item img {
+        height: 200px;
+    }
+
+    iframe {
+        height: 230px;
+    }
+
+    section {
+        padding: 25px 5%;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- NAVIGATION BAR -->
+<nav>
+    <a href="#home">Home</a>
+    <a href="#experiments">Experiments</a>
+    <a href="#objectives">Objectives</a>
+    <a href="#procedure">Procedure</a>
+    <a href="#gallery">Equipment Gallery</a>
+    <a href="#video">Video</a>
+    <a href="#student">Student Form</a>
+</nav>
+
+<!-- HEADER -->
+<header id="home">
+    <h1>Engineering Virtual Laboratory</h1>
+    <p>Learn, Explore and Perform Experiments Online</p>
+</header>
+
+<!-- EXPERIMENT LIST -->
+<section id="experiments">
+
+    <h2>Experiment List</h2>
+
+    <div class="experiment-container">
+
+        <div class="card">
+            <h3>Experiment 1: Ohm's Law</h3>
+            <p>Study the relationship between voltage, current and resistance.</p>
+        </div>
+
+        <div class="card">
+            <h3>Experiment 2: Logic Gates</h3>
+            <p>Understand AND, OR, NOT, NAND and NOR logic gates.</p>
+        </div>
+
+        <div class="card">
+            <h3>Experiment 3: LED Circuit</h3>
+            <p>Study the working principle of LEDs and electronic circuits.</p>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- OBJECTIVES -->
+<section id="objectives">
+
+    <h2>Laboratory Objectives</h2>
+
+    <div class="objectives">
+
+        <ul>
+            <li>Understand engineering concepts practically.</li>
+            <li>Develop technical and problem-solving skills.</li>
+            <li>Perform experiments in a virtual environment.</li>
+            <li>Understand laboratory equipment.</li>
+            <li>Improve practical knowledge and skills.</li>
+        </ul>
+
+    </div>
+
+</section>
+
+<!-- PROCEDURE -->
+<section id="procedure">
+
+    <h2>Experiment Procedure</h2>
+
+    <div class="procedure">
+
+        <ol>
+            <li>Select an experiment from the experiment list.</li>
+            <li>Read the experiment objectives carefully.</li>
+            <li>Identify the required laboratory equipment.</li>
+            <li>Watch the instructional video.</li>
+            <li>Follow the experiment steps.</li>
+            <li>Record observations and results.</li>
+        </ol>
+
+    </div>
+
+</section>
+
+<!-- EQUIPMENT IMAGE GALLERY -->
+<section id="gallery">
+
+    <h2>Laboratory Equipment Image Gallery</h2>
+
+    <div class="gallery">
+
+        <figure class="gallery-item">
+
+            <img src="multi meter image.webp"
+                 alt="Digital Multimeter">
+
+            <figcaption>Digital Multimeter - Measures voltage and current</figcaption>
+
+        </figure>
+
+        <figure class="gallery-item">
+
+            <img src="resistor image.webp"
+                 alt="Electronic Resistor">
+
+            <figcaption>Resistor - Controls current flow</figcaption>
+
+        </figure>
+
+        <figure class="gallery-item">
+
+            <img src="breadboard image.jpg"
+                 alt="Electronic Breadboard">
+
+            <figcaption>Breadboard - Builds electronic circuits</figcaption>
+
+        </figure>
+
+        <figure class="gallery-item">
+
+            <img src="oscilloscope.jpg"
+                 alt="Oscilloscope">
+
+            <figcaption>Oscilloscope - Displays electrical waveforms</figcaption>
+
+        </figure>
+
+        <figure class="gallery-item">
+
+            <img src="led image.webp"
+                 alt="LED">
+
+            <figcaption>LED - Produces light using electrical energy</figcaption>
+
+        </figure>
+
+        <figure class="gallery-item">
+
+            <img src="dc power supply.jpg"
+                 alt="DC Power Supply">
+
+            <figcaption>DC Power Supply - Provides electrical power</figcaption>
+
+        </figure>
+
+    </div>
+
+</section>
+
+<!-- INSTRUCTIONAL VIDEO -->
+<section id="video">
+
+    <h2>Instructional Video</h2>
+
+    <div class="video-container">
+
+        <iframe
+            src="https://www.youtube.com/embed/mc979OhitAg"
+            title="Basic Electronics Tutorial"
+            allowfullscreen>
+        </iframe>
+
+    </div>
+
+</section>
+
+<!-- STUDENT DETAILS FORM -->
+<section id="student">
+
+    <h2>Student Details Form</h2>
+
+    <form class="form-container" onsubmit="submitForm(event)">
+
+        <input type="text"
+               placeholder="Enter Student Name"
+               required>
+
+        <input type="text"
+               placeholder="Enter Register Number"
+               required>
+
+        <input type="email"
+               placeholder="Enter Email Address"
+               required>
+
+        <input type="text"
+               placeholder="Enter Department"
+               required>
+
+        <select required>
+            <option value="">Select Year</option>
+            <option>First Year</option>
+            <option>Second Year</option>
+            <option>Third Year</option>
+            <option>Fourth Year</option>
+        </select>
+
+        <select required>
+            <option value="">Select Experiment</option>
+            <option>Ohm's Law</option>
+            <option>Logic Gates</option>
+            <option>LED Circuit</option>
+        </select>
+
+        <textarea placeholder="Enter Your Feedback"></textarea>
+
+        <button type="submit">Submit Details</button>
+
+    </form>
+
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <p>© 2026 Engineering Virtual Laboratory</p>
+    <p>Designed for Engineering Students</p>
+</footer>
+
+<!-- JAVASCRIPT -->
+<script>
+
+function submitForm(event) {
+
+    event.preventDefault();
+
+    alert("Student details submitted successfully!");
+
+}
+
+</script>
+
+</body>
+</html>

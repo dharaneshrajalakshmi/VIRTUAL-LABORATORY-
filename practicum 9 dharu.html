@@ -1,0 +1,473 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Engineering Virtual Laboratory</title>
+
+<style>
+
+/* GENERAL STYLING */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #f1f5f9;
+    color: #1e293b;
+}
+
+/* HEADER */
+header {
+    background: linear-gradient(120deg, #0f172a, #2563eb);
+    color: white;
+    text-align: center;
+    padding: 30px;
+    animation: slideDown 1s ease;
+}
+
+header h1 {
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+header p {
+    font-size: 16px;
+}
+
+/* NAVIGATION */
+nav {
+    background: #1e293b;
+    padding: 15px;
+    text-align: center;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin: 15px;
+    transition: 0.3s;
+}
+
+nav a:hover {
+    color: #38bdf8;
+}
+
+/* SECTION */
+section {
+    padding: 30px;
+    margin: 20px auto;
+    width: 90%;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    animation: fadeIn 1.2s ease;
+}
+
+h2 {
+    color: #1d4ed8;
+    margin-bottom: 20px;
+}
+
+/* EXPERIMENT CARDS */
+.experiment-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.card {
+    background: #eff6ff;
+    padding: 20px;
+    border-radius: 10px;
+    width: 300px;
+    transition: transform 0.4s, box-shadow 0.4s;
+    opacity: 0;
+    animation: cardAppear 0.8s forwards;
+}
+
+.card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+.card h3 {
+    color: #1e40af;
+    margin-bottom: 10px;
+}
+
+button {
+    background: #2563eb;
+    color: white;
+    padding: 10px 18px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-top: 12px;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: #1e40af;
+    transform: scale(1.05);
+}
+
+/* EXPERIMENT DETAILS */
+.details {
+    display: none;
+    background: #dbeafe;
+    padding: 15px;
+    margin-top: 15px;
+    border-radius: 8px;
+    animation: fadeIn 0.5s;
+}
+
+.details.show {
+    display: block;
+}
+
+/* EQUIPMENT */
+.equipment-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.equipment-container img {
+    width: 220px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 10px;
+    transition: transform 0.4s;
+}
+
+.equipment-container img:hover {
+    transform: scale(1.08);
+}
+
+.equipment-item {
+    text-align: center;
+}
+
+/* VIDEO */
+video, iframe {
+    width: 100%;
+    max-width: 650px;
+    height: 350px;
+    border-radius: 10px;
+}
+
+/* STUDENT FORM */
+form {
+    max-width: 500px;
+    margin: auto;
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+}
+
+input:focus, select:focus {
+    outline: 2px solid #60a5fa;
+}
+
+/* NOTIFICATION */
+#notification {
+    display: none;
+    background: #16a34a;
+    color: white;
+    padding: 15px;
+    margin-top: 15px;
+    border-radius: 8px;
+    animation: fadeIn 0.5s;
+}
+
+#notification.show {
+    display: block;
+}
+
+/* FOOTER */
+footer {
+    background: #0f172a;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+/* ANIMATIONS */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes cardAppear {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header>
+    <h1>ENGINEERING VIRTUAL LABORATORY</h1>
+    <p>Learn | Experiment | Explore | Innovate</p>
+</header>
+
+<!-- NAVIGATION -->
+<nav>
+    <a href="#home">Home</a>
+    <a href="#experiments">Experiments</a>
+    <a href="#equipment">Equipment</a>
+    <a href="#video">Video</a>
+    <a href="#student">Student Registration</a>
+</nav>
+
+<!-- HOME -->
+<section id="home">
+    <h2>Welcome to Virtual Laboratory</h2>
+    <p>
+        Welcome to our Engineering Virtual Laboratory.
+        This platform allows students to understand engineering
+        experiments through objectives, procedures, equipment
+        images and instructional videos.
+        Students can explore experiments and improve their
+        practical knowledge through digital learning.
+    </p>
+</section>
+
+<!-- EXPERIMENT LIST -->
+<section id="experiments">
+    <h2>Available Experiments</h2>
+
+    <div class="experiment-container">
+
+        <div class="card">
+            <h3>Experiment 1: Ohm's Law</h3>
+            <p>Study the relationship between voltage and current.</p>
+            <button class="toggle-btn">View Details</button>
+
+            <div class="details">
+                <h4>Objective:</h4>
+                <p>To verify Ohm's Law and calculate resistance.</p>
+
+                <h4>Procedure:</h4>
+                <ol>
+                    <li>Connect the circuit.</li>
+                    <li>Apply different voltages.</li>
+                    <li>Measure the current.</li>
+                    <li>Calculate resistance using V/I.</li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>Experiment 2: Logic Gates</h3>
+            <p>Understand the working of basic digital gates.</p>
+            <button class="toggle-btn">View Details</button>
+
+            <div class="details">
+                <h4>Objective:</h4>
+                <p>To study AND, OR and NOT logic gates.</p>
+
+                <h4>Procedure:</h4>
+                <ol>
+                    <li>Connect the logic gate circuit.</li>
+                    <li>Apply different input combinations.</li>
+                    <li>Observe the output.</li>
+                    <li>Verify the truth table.</li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>Experiment 3: DC Motor</h3>
+            <p>Study the construction and operation of a DC motor.</p>
+            <button class="toggle-btn">View Details</button>
+
+            <div class="details">
+                <h4>Objective:</h4>
+                <p>To understand the working principle of a DC motor.</p>
+
+                <h4>Procedure:</h4>
+                <ol>
+                    <li>Identify the motor terminals.</li>
+                    <li>Connect the DC supply.</li>
+                    <li>Switch on the power.</li>
+                    <li>Observe the motor rotation.</li>
+                </ol>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- EQUIPMENT IMAGES -->
+<section id="equipment">
+    <h2>Laboratory Equipment</h2>
+
+    <div class="equipment-container">
+
+        <div class="equipment-item">
+            <img src="multi meter image.webp"
+                 alt="Digital Multimeter">
+            <p><b>Digital Multimeter</b></p>
+        </div>
+
+        <div class="equipment-item">
+            <img src="oscilloscope.jpg"
+                 alt="Oscilloscope">
+            <p><b>Oscilloscope</b></p>
+        </div>
+
+        <div class="equipment-item">
+            <img src="dc motor.jpg"
+                 alt="DC Motor">
+            <p><b>DC Motor</b></p>
+        </div>
+
+    </div>
+</section>
+
+<!-- INSTRUCTIONAL VIDEO -->
+<section id="video">
+    <h2>Instructional Video</h2>
+
+    <p>Watch the following video to understand basic electrical laboratory experiments.</p>
+
+    <br>
+
+    <iframe
+        src="https://www.youtube.com/embed/AJsDwJ2ndng"
+        title="Engineering Laboratory Tutorial"
+        allowfullscreen>
+    </iframe>
+
+</section>
+
+<!-- STUDENT REGISTRATION -->
+<section id="student">
+    <h2>Student Details Form</h2>
+
+    <form id="studentForm">
+
+        <label>Student Name</label>
+        <input type="text" id="name" placeholder="Enter your name" required>
+
+        <label>Register Number</label>
+        <input type="text" id="register" placeholder="Enter register number" required>
+
+        <label>Department</label>
+        <select id="department" required>
+            <option value="">Select Department</option>
+            <option>Computer Science Engineering</option>
+            <option>Electronics and Communication</option>
+            <option>Electrical Engineering</option>
+            <option>Mechanical Engineering</option>
+            <option>Civil Engineering</option>
+        </select>
+
+        <label>Email Address</label>
+        <input type="email" id="email" placeholder="Enter email address" required>
+
+        <label>Select Experiment</label>
+        <select id="experiment" required>
+            <option value="">Choose Experiment</option>
+            <option>Ohm's Law</option>
+            <option>Logic Gates</option>
+            <option>DC Motor</option>
+        </select>
+
+        <button type="submit">Submit Details</button>
+
+        <div id="notification">
+            <span>✔</span> Student details submitted successfully!
+        </div>
+
+    </form>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <p>© 2026 Engineering Virtual Laboratory | All Rights Reserved</p>
+    <p>Designed for Engineering Students</p>
+</footer>
+
+<script>
+
+// EXPERIMENT DETAILS TOGGLE
+const buttons = document.querySelectorAll(".toggle-btn");
+
+buttons.forEach(function(button) {
+
+    button.addEventListener("click", function() {
+
+        const details = this.nextElementSibling;
+
+        details.classList.toggle("show");
+
+        if(details.classList.contains("show")) {
+            this.textContent = "Hide Details";
+            details.classList.add("show");
+        }
+        else {
+            this.textContent = "View Details";
+            details.classList.remove("show");
+        }
+
+    });
+
+});
+
+// STUDENT FORM SUBMISSION
+const form = document.getElementById("studentForm");
+
+const notification = document.getElementById("notification");
+
+form.addEventListener("submit", function(event) {
+
+    event.preventDefault();
+
+    notification.classList.add("show");
+
+    setTimeout(function() {
+        notification.classList.remove("show");
+    }, 4000);
+
+    form.reset();
+
+});
+
+</script>
+
+</body>
+</html>

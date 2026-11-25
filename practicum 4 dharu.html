@@ -1,0 +1,680 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Engineering Virtual Laboratory</title>
+
+<style>
+
+/* =================================
+   1. BOX MODEL
+================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* =================================
+   2. FONT STYLING AND COLORS
+================================= */
+
+body {
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    color: #263238;
+    background-color: #eef3f8;
+    line-height: 1.6;
+}
+
+/* =================================
+   3. HEADER AND BACKGROUND
+================================= */
+
+header {
+    background: linear-gradient(120deg, #102a43, #176b87);
+    color: white;
+    text-align: center;
+    padding: 40px 20px;
+    width: 100%;
+    min-height: 160px;
+}
+
+header h1 {
+    font-size: 32px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+header p {
+    font-size: 17px;
+    margin-top: 10px;
+}
+
+/* =================================
+   4. CSS POSITIONING
+================================= */
+
+nav {
+    background-color: #176b87;
+    padding: 15px;
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin: 0 15px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+/* HOVER EFFECT */
+
+nav a:hover {
+    color: black;
+    text-decoration: underline;
+}
+
+/* =================================
+   5. BASIC PAGE LAYOUT
+================================= */
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 35px auto;
+}
+
+.section-title {
+    font-size: 26px;
+    color: #102a43;
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+/* =================================
+   6. CSS GRID LAYOUT
+================================= */
+
+.experiment-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+/* =================================
+   7. CARDS, BORDERS AND SPACING
+================================= */
+
+.card {
+    background-color: white;
+    padding: 25px;
+    margin-bottom: 10px;
+    border: 1px solid #d5e0e8;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    position: relative;
+    transition: 0.3s;
+    min-height: 190px;
+}
+
+/* CARD HOVER EFFECT */
+
+.card:hover {
+    transform: translateY(-7px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+.card h3 {
+    color: #176b87;
+    font-size: 21px;
+    margin-bottom: 12px;
+}
+
+.card p {
+    text-align: justify;
+}
+
+/* =================================
+   8. BUTTON STYLING
+================================= */
+
+button {
+    background-color: #176b87;
+    color: white;
+    padding: 12px 22px;
+    margin-top: 15px;
+    border: none;
+    border-radius: 6px;
+    font-size: 15px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background-color: #102a43;
+    transform: scale(1.04);
+}
+
+/* =================================
+   9. EXPERIMENT DETAILS
+================================= */
+
+.details {
+    background-color: white;
+    padding: 25px;
+    margin-top: 25px;
+    border-left: 5px solid #176b87;
+    border-radius: 10px;
+    min-height: 150px;
+}
+
+.details h3 {
+    color: #176b87;
+    margin-bottom: 12px;
+}
+
+.details h4 {
+    margin-top: 12px;
+}
+
+.details ol {
+    margin-left: 25px;
+}
+
+/* =================================
+   10. FLEXBOX EQUIPMENT LAYOUT
+================================= */
+
+.equipment-list {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 25px;
+}
+
+.equipment-card {
+    width: 250px;
+    min-height: 220px;
+    background-color: white;
+    padding: 18px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    text-align: center;
+    transition: 0.3s;
+}
+
+.equipment-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+}
+
+.equipment-card img {
+    width: 100%;
+    height: 150px;
+    object-fit: contain;
+}
+
+.equipment-card p {
+    color: #176b87;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+/* =================================
+   11. VIDEO SECTION
+================================= */
+
+.video-box {
+    background-color: white;
+    padding: 25px;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    text-align: center;
+}
+
+.video-box iframe {
+    width: 100%;
+    max-width: 700px;
+    height: 380px;
+    margin-top: 20px;
+    border: 3px solid #176b87;
+    border-radius: 10px;
+}
+
+/* =================================
+   12. STUDENT FORM
+================================= */
+
+.form-box {
+    background-color: white;
+    width: 100%;
+    max-width: 650px;
+    margin: auto;
+    padding: 30px;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-top: 15px;
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 12px;
+    margin-top: 7px;
+    border: 1px solid #bbb;
+    border-radius: 6px;
+    font-size: 15px;
+}
+
+input:focus, select:focus, textarea:focus {
+    outline: 2px solid #176b87;
+}
+
+input[type="radio"],
+input[type="checkbox"] {
+    width: auto;
+    margin-right: 5px;
+}
+
+.option-group label {
+    display: inline-block;
+    font-weight: normal;
+    margin-right: 12px;
+}
+
+.reset {
+    background-color: #777;
+}
+
+/* =================================
+   13. FOOTER
+================================= */
+
+footer {
+    background-color: #102a43;
+    color: white;
+    text-align: center;
+    padding: 25px;
+    margin-top: 40px;
+    width: 100%;
+}
+
+/* =================================
+   14. RESPONSIVE PAGE LAYOUT
+================================= */
+
+@media (max-width: 768px) {
+
+    .experiment-list {
+        grid-template-columns: 1fr;
+    }
+
+    header h1 {
+        font-size: 24px;
+    }
+
+    nav a {
+        display: inline-block;
+        margin: 6px;
+    }
+
+    .container {
+        width: 94%;
+    }
+
+    .video-box iframe {
+        height: 230px;
+    }
+
+    .form-box {
+        padding: 18px;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+
+<header>
+    <h1>ENGINEERING VIRTUAL LABORATORY</h1>
+    <p>Learn | Explore | Experiment</p>
+    <p>Online Practical Learning Platform</p>
+</header>
+
+<!-- NAVIGATION -->
+
+<nav>
+    <a href="#home">Home</a>
+    <a href="#experiments">Experiments</a>
+    <a href="#equipment">Equipment</a>
+    <a href="#video">Video</a>
+    <a href="#student">Registration</a>
+</nav>
+
+<!-- HOME SECTION -->
+
+<div class="container" id="home">
+
+    <h2 class="section-title">Welcome to Virtual Laboratory</h2>
+
+    <div class="card">
+        <p>
+            Welcome to our Engineering Virtual Laboratory.
+            This platform provides students with practical
+            learning resources, experiment objectives,
+            step-by-step procedures, laboratory equipment
+            images and instructional videos.
+        </p>
+    </div>
+
+</div>
+
+<!-- EXPERIMENT SECTION -->
+
+<div class="container" id="experiments">
+
+    <h2 class="section-title">Available Experiments</h2>
+
+    <div class="experiment-list">
+
+        <div class="card">
+            <h3>Experiment 1</h3>
+            <h4>Ohm's Law</h4>
+            <p>Study the relationship between voltage,
+            current and resistance.</p>
+
+            <button onclick="showExperiment(1)">
+                View Details
+            </button>
+        </div>
+
+        <div class="card">
+            <h3>Experiment 2</h3>
+            <h4>Logic Gates</h4>
+            <p>Understand AND, OR and NOT gates
+            and their truth tables.</p>
+
+            <button onclick="showExperiment(2)">
+                View Details
+            </button>
+        </div>
+
+        <div class="card">
+            <h3>Experiment 3</h3>
+            <h4>LED Circuit</h4>
+            <p>Understand the working principle
+            of an LED circuit.</p>
+
+            <button onclick="showExperiment(3)">
+                View Details
+            </button>
+        </div>
+
+    </div>
+
+    <div class="details" id="experimentDetails">
+        <h3>Select an Experiment</h3>
+        <p>Click View Details to see the objective and procedure.</p>
+    </div>
+
+</div>
+
+<!-- EQUIPMENT SECTION -->
+
+<div class="container" id="equipment">
+
+    <h2 class="section-title">Laboratory Equipment</h2>
+
+    <div class="equipment-list">
+
+        <div class="equipment-card">
+            <img src="resistor image.webp" alt="Resistor">
+            <p>Resistor</p>
+        </div>
+
+        <div class="equipment-card">
+            <img src="multi meter image.webp" alt="Multimeter">
+            <p>Digital Multimeter</p>
+        </div>
+
+        <div class="equipment-card">
+            <img src="breadboard image.jpg" alt="Breadboard">
+            <p>Breadboard</p>
+        </div>
+
+    </div>
+
+</div>
+
+<!-- VIDEO SECTION -->
+
+<div class="container" id="video">
+
+    <h2 class="section-title">Instructional Video</h2>
+
+    <div class="video-box">
+
+        <p>Watch the instructional video to understand
+        the laboratory experiments.</p>
+
+        <iframe
+            src="https://www.youtube.com/embed/mc979OhitAg"
+            title="Instructional Video"
+            allowfullscreen>
+        </iframe>
+
+    </div>
+
+</div>
+
+<!-- STUDENT FORM -->
+
+<div class="container" id="student">
+
+    <h2 class="section-title">Student Registration Form</h2>
+
+    <div class="form-box">
+
+        <form onsubmit="submitForm(event)">
+
+            <label>Student Name:</label>
+            <input type="text" placeholder="Enter your name"
+                   minlength="3" required>
+
+            <label>Email:</label>
+            <input type="email" placeholder="Enter your email"
+                   required>
+
+            <label>Password:</label>
+            <input type="password" placeholder="Minimum 8 characters"
+                   minlength="8" required>
+
+            <label>Age:</label>
+            <input type="number" min="16" max="100"
+                   placeholder="Enter your age" required>
+
+            <label>Date of Birth:</label>
+            <input type="date" required>
+
+            <label>Gender:</label>
+
+            <div class="option-group">
+                <label>
+                    <input type="radio" name="gender"
+                           value="Male" required> Male
+                </label>
+
+                <label>
+                    <input type="radio" name="gender"
+                           value="Female"> Female
+                </label>
+
+                <label>
+                    <input type="radio" name="gender"
+                           value="Other"> Other
+                </label>
+            </div>
+
+            <label>Interested Subjects:</label>
+
+            <div class="option-group">
+                <label>
+                    <input type="checkbox" name="subject"
+                           value="Physics"> Physics
+                </label>
+
+                <label>
+                    <input type="checkbox" name="subject"
+                           value="Electronics"> Electronics
+                </label>
+
+                <label>
+                    <input type="checkbox" name="subject"
+                           value="Computer Science"> Computer Science
+                </label>
+            </div>
+
+            <label>Department:</label>
+
+            <select required>
+                <option value="">Select Department</option>
+                <option>CSE</option>
+                <option>ECE</option>
+                <option>EEE</option>
+                <option>Mechanical</option>
+                <option>Civil</option>
+            </select>
+
+            <label>Address:</label>
+
+            <textarea rows="4" minlength="5"
+                      placeholder="Enter your address"
+                      required></textarea>
+
+            <label>Upload Student ID:</label>
+
+            <input type="file"
+                   accept=".jpg,.jpeg,.png,.pdf"
+                   required>
+
+            <br><br>
+
+            <button type="submit">Submit</button>
+
+            <button type="reset" class="reset">Reset</button>
+
+        </form>
+
+    </div>
+
+</div>
+
+<!-- FOOTER -->
+
+<footer>
+    <h3>Engineering Virtual Laboratory</h3>
+    <p>Designed for Engineering Students</p>
+    <p>Copyright 2026 - All Rights Reserved</p>
+</footer>
+
+<!-- JAVASCRIPT -->
+
+<script>
+
+function showExperiment(number) {
+
+    let details =
+    document.getElementById("experimentDetails");
+
+    if(number === 1) {
+
+        details.innerHTML = `
+            <h3>Experiment 1: Ohm's Law</h3>
+            <h4>Objective:</h4>
+            <p>To verify the relationship between voltage,
+            current and resistance.</p>
+
+            <h4>Procedure:</h4>
+            <ol>
+                <li>Connect the resistor to the circuit.</li>
+                <li>Connect the measuring instruments.</li>
+                <li>Apply a suitable low voltage.</li>
+                <li>Measure and record the current.</li>
+                <li>Compare the readings with Ohm's Law.</li>
+            </ol>
+        `;
+
+    }
+
+    else if(number === 2) {
+
+        details.innerHTML = `
+            <h3>Experiment 2: Logic Gates</h3>
+            <h4>Objective:</h4>
+            <p>To study basic digital logic gates.</p>
+
+            <h4>Procedure:</h4>
+            <ol>
+                <li>Study AND, OR and NOT gates.</li>
+                <li>Apply different input combinations.</li>
+                <li>Observe the output values.</li>
+                <li>Prepare the truth table.</li>
+                <li>Verify the results.</li>
+            </ol>
+        `;
+
+    }
+
+    else if(number === 3) {
+
+        details.innerHTML = `
+            <h3>Experiment 3: LED Circuit</h3>
+            <h4>Objective:</h4>
+            <p>To understand the working of an LED.</p>
+
+            <h4>Procedure:</h4>
+            <ol>
+                <li>Identify the LED terminals.</li>
+                <li>Connect the LED with a suitable resistor.</li>
+                <li>Use an appropriate low-voltage supply.</li>
+                <li>Observe the LED operation.</li>
+                <li>Record the observations.</li>
+            </ol>
+        `;
+
+    }
+
+}
+
+function submitForm(event) {
+
+    event.preventDefault();
+
+    alert("Student Registration Successful!");
+
+    event.target.reset();
+
+}
+
+</script>
+
+</body>
+</html>

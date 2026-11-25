@@ -1,0 +1,504 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Responsive Engineering Virtual Laboratory</title>
+
+<style>
+
+/* GENERAL STYLING */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f1f5f9;
+    color: #222;
+    line-height: 1.6;
+}
+
+/* NAVIGATION BAR */
+nav {
+    background-color: #102a43;
+    padding: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+nav a:hover {
+    color: #38bdf8;
+}
+
+/* HEADER */
+header {
+    background: linear-gradient(120deg, #075985, #22304e);
+    color: white;
+    text-align: center;
+    padding: 50px 20px;
+}
+
+header h1 {
+    font-size: 34px;
+    margin-bottom: 10px;
+}
+
+/* COMMON SECTIONS */
+section {
+    padding: 35px 6%;
+}
+
+h2 {
+    text-align: center;
+    color: #075985;
+    margin-bottom: 25px;
+}
+
+/* EXPERIMENT LIST */
+.experiment-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.card {
+    background-color: white;
+    padding: 22px;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px #00000015;
+}
+
+.card h3 {
+    color: #0369a1;
+    margin-bottom: 10px;
+}
+
+/* OBJECTIVES */
+.objectives {
+    background-color: white;
+    padding: 25px;
+    border-radius: 10px;
+}
+
+.objectives ul {
+    padding-left: 25px;
+}
+
+/* PROCEDURE */
+.procedure {
+    background-color: white;
+    padding: 25px;
+    border-radius: 10px;
+}
+
+.procedure ol {
+    padding-left: 25px;
+}
+
+/* EQUIPMENT IMAGE GALLERY */
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.gallery-item {
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden;
+    text-align: center;
+    box-shadow: 0 3px 10px #00000015;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    display: block;
+}
+
+.gallery-item figcaption {
+    padding: 15px;
+    color: #075985;
+    font-weight: bold;
+}
+
+/* INSTRUCTIONAL VIDEO */
+.video-container {
+    text-align: center;
+}
+
+iframe {
+    width: 100%;
+    max-width: 700px;
+    height: 350px;
+    border: none;
+    border-radius: 10px;
+}
+
+/* STUDENT DETAILS FORM */
+.form-container {
+    background-color: white;
+    max-width: 550px;
+    margin: auto;
+    padding: 25px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 15px;
+}
+
+button {
+    background-color: #0369a1;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #075985;
+}
+
+/* FOOTER */
+footer {
+    background-color: #102a43;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+/* =================================
+   RESPONSIVE DESIGN USING MEDIA QUERIES
+   ================================= */
+
+/* TABLET SCREEN: 601px TO 900px */
+@media screen and (max-width: 900px) {
+
+    header h1 {
+        font-size: 28px;
+    }
+
+    .experiment-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .gallery {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    section {
+        padding: 30px 4%;
+    }
+
+    iframe {
+        height: 300px;
+    }
+
+}
+
+/* MOBILE SCREEN: 600px AND BELOW */
+@media screen and (max-width: 600px) {
+
+    nav {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    nav a {
+        display: block;
+    }
+
+    header {
+        padding: 30px 15px;
+    }
+
+    header h1 {
+        font-size: 23px;
+    }
+
+    header p {
+        font-size: 14px;
+    }
+
+    .experiment-container {
+        grid-template-columns: 1fr;
+    }
+
+    .gallery {
+        grid-template-columns: 1fr;
+    }
+
+    .gallery-item img {
+        height: 200px;
+    }
+
+    section {
+        padding: 25px 5%;
+    }
+
+    iframe {
+        height: 220px;
+    }
+
+    .form-container {
+        padding: 18px;
+    }
+
+    h2 {
+        font-size: 22px;
+    }
+
+}
+
+/* SMALL MOBILE SCREEN: 350px AND BELOW */
+@media screen and (max-width: 350px) {
+
+    header h1 {
+        font-size: 20px;
+    }
+
+    nav {
+        padding: 12px;
+    }
+
+    .card {
+        padding: 15px;
+    }
+
+    .gallery-item img {
+        height: 170px;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- NAVIGATION BAR -->
+<nav>
+    <a href="#home">Home</a>
+    <a href="#experiments">Experiments</a>
+    <a href="#objectives">Objectives</a>
+    <a href="#procedure">Procedure</a>
+    <a href="#equipment">Equipment</a>
+    <a href="#video">Video</a>
+    <a href="#student">Student Form</a>
+</nav>
+
+<!-- HEADER -->
+<header id="home">
+    <h1>Engineering Virtual Laboratory</h1>
+    <p>Learn, Explore and Perform Experiments Online</p>
+</header>
+
+<!-- EXPERIMENT LIST -->
+<section id="experiments">
+
+    <h2>Experiment List</h2>
+
+    <div class="experiment-container">
+
+        <div class="card">
+            <h3>Experiment 1: Ohm's Law</h3>
+            <p>Study the relationship between voltage, current and resistance.</p>
+        </div>
+
+        <div class="card">
+            <h3>Experiment 2: Logic Gates</h3>
+            <p>Understand AND, OR, NOT, NAND and NOR logic gates.</p>
+        </div>
+
+        <div class="card">
+            <h3>Experiment 3: LED Circuit</h3>
+            <p>Study the working principle of LEDs and electronic circuits.</p>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- OBJECTIVES -->
+<section id="objectives">
+
+    <h2>Laboratory Objectives</h2>
+
+    <div class="objectives">
+        <ul>
+            <li>Understand engineering concepts practically.</li>
+            <li>Develop technical and problem-solving skills.</li>
+            <li>Perform experiments in a virtual environment.</li>
+            <li>Understand laboratory equipment.</li>
+            <li>Improve practical knowledge and skills.</li>
+        </ul>
+    </div>
+
+</section>
+
+<!-- PROCEDURE -->
+<section id="procedure">
+
+    <h2>Experiment Procedure</h2>
+
+    <div class="procedure">
+        <ol>
+            <li>Select an experiment from the experiment list.</li>
+            <li>Read the experiment objectives carefully.</li>
+            <li>Identify the required laboratory equipment.</li>
+            <li>Watch the instructional video.</li>
+            <li>Follow the experiment steps.</li>
+            <li>Record observations and results.</li>
+        </ol>
+    </div>
+
+</section>
+
+<!-- EQUIPMENT IMAGE GALLERY -->
+<section id="equipment">
+
+    <h2>Laboratory Equipment Gallery</h2>
+
+    <div class="gallery">
+
+        <figure class="gallery-item">
+            <img src="https://placehold.co/600x400?text=Digital+Multimeter"
+                 alt="Digital Multimeter">
+            <figcaption>Digital Multimeter - Measures voltage and current</figcaption>
+        </figure>
+
+        <figure class="gallery-item">
+            <img src="https://placehold.co/600x400?text=Resistor"
+                 alt="Resistor">
+            <figcaption>Resistor - Controls current flow</figcaption>
+        </figure>
+
+        <figure class="gallery-item">
+            <img src="https://placehold.co/600x400?text=Breadboard"
+                 alt="Breadboard">
+            <figcaption>Breadboard - Builds electronic circuits</figcaption>
+        </figure>
+
+        <figure class="gallery-item">
+            <img src="https://placehold.co/600x400?text=Oscilloscope"
+                 alt="Oscilloscope">
+            <figcaption>Oscilloscope - Displays electrical waveforms</figcaption>
+        </figure>
+
+        <figure class="gallery-item">
+            <img src="https://placehold.co/600x400?text=LED"
+                 alt="LED">
+            <figcaption>LED - Produces light using electrical energy</figcaption>
+        </figure>
+
+        <figure class="gallery-item">
+            <img src="https://placehold.co/600x400?text=Power+Supply"
+                 alt="DC Power Supply">
+            <figcaption>DC Power Supply - Provides electrical power</figcaption>
+        </figure>
+
+    </div>
+
+</section>
+
+<!-- INSTRUCTIONAL VIDEO -->
+<section id="video">
+
+    <h2>Instructional Video</h2>
+
+    <div class="video-container">
+
+        <iframe
+            src="https://www.youtube.com/embed/mc979OhitAg"
+            title="Basic Electronics Tutorial"
+            allowfullscreen>
+        </iframe>
+
+    </div>
+
+</section>
+
+<!-- STUDENT DETAILS FORM -->
+<section id="student">
+
+    <h2>Student Details Form</h2>
+
+    <form class="form-container" onsubmit="submitForm(event)">
+
+        <input type="text" placeholder="Enter Student Name" required>
+
+        <input type="text" placeholder="Enter Register Number" required>
+
+        <input type="email" placeholder="Enter Email Address" required>
+
+        <input type="text" placeholder="Enter Department" required>
+
+        <select required>
+            <option value="">Select Year</option>
+            <option>First Year</option>
+            <option>Second Year</option>
+            <option>Third Year</option>
+            <option>Fourth Year</option>
+        </select>
+
+        <select required>
+            <option value="">Select Experiment</option>
+            <option>Ohm's Law</option>
+            <option>Logic Gates</option>
+            <option>LED Circuit</option>
+        </select>
+
+        <textarea placeholder="Enter Your Feedback"></textarea>
+
+        <button type="submit">Submit Details</button>
+
+    </form>
+
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <p>© 2026 Engineering Virtual Laboratory</p>
+    <p>Designed for Engineering Students</p>
+</footer>
+
+<!-- JAVASCRIPT -->
+<script>
+
+function submitForm(event) {
+
+    event.preventDefault();
+
+    alert("Student details submitted successfully!");
+
+}
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,822 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Engineering Virtual Laboratory</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f1f5f9;
+            color: #263445;
+        }
+
+        /* HEADER */
+        header {
+            background: #12345a;
+            color: white;
+            text-align: center;
+            padding: 30px 15px;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        /* NAVIGATION */
+        nav {
+            background: #1d4e89;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 25px;
+            padding: 15px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            color: #70c6ff;
+        }
+
+        /* SECTIONS */
+        section {
+            max-width: 1150px;
+            margin: 25px auto;
+            padding: 25px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px #d5dce5;
+        }
+
+        h2 {
+            color: #12345a;
+            border-bottom: 2px solid #1d4e89;
+            padding-bottom: 10px;
+        }
+
+        /* SEARCH AND FILTER */
+        .search-area {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin: 20px 0;
+        }
+
+        input, select {
+            padding: 12px;
+            border: 1px solid #b8c5d4;
+            border-radius: 6px;
+            font-size: 15px;
+        }
+
+        .search-area input {
+            flex: 2;
+            min-width: 200px;
+        }
+
+        .search-area select {
+            flex: 1;
+            min-width: 180px;
+        }
+
+        input:focus, select:focus {
+            outline: 2px solid #5b9bd5;
+            border-color: #1d4e89;
+        }
+
+        /* EXPERIMENT CARDS */
+        .experiment-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 20px;
+        }
+
+        .experiment-card {
+            position: relative;
+            border: 1px solid #ccd6e2;
+            border-radius: 8px;
+            padding: 15px;
+            background: #f8fbff;
+            transition: 0.3s;
+        }
+
+        .experiment-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 6px 15px #cbd5e1;
+        }
+
+        .experiment-card img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+            border-radius: 6px;
+        }
+
+        .experiment-card h3 {
+            color: #1d4e89;
+        }
+
+        .category {
+            display: inline-block;
+            background: #dceafe;
+            color: #12345a;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 12px;
+        }
+
+        /* BUTTONS */
+        button {
+            background: #1d4e89;
+            color: white;
+            border: none;
+            padding: 11px 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #12345a;
+            transform: scale(1.03);
+        }
+
+        /* ACCORDION */
+        details {
+            border: 1px solid #ccd6e2;
+            border-radius: 7px;
+            margin: 12px 0;
+            padding: 15px;
+            background: #f8fbff;
+        }
+
+        summary {
+            cursor: pointer;
+            font-weight: bold;
+            color: #1d4e89;
+        }
+
+        details[open] {
+            background: #eef5ff;
+        }
+
+        details p, details ul {
+            line-height: 1.7;
+        }
+
+        /* EQUIPMENT GALLERY */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .gallery-item {
+            text-align: center;
+            padding: 10px;
+            border: 1px solid #ccd6e2;
+            border-radius: 8px;
+            transition: 0.3s;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.04);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+            border-radius: 6px;
+        }
+
+        /* VIDEO */
+        .video-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%;
+            height: 0;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        /* STUDENT FORM */
+        .student-form {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 15px;
+        }
+
+        .student-form input,
+        .student-form select {
+            width: 100%;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+        }
+
+        .form-button {
+            grid-column: 1 / -1;
+        }
+
+        #message {
+            color: green;
+            font-weight: bold;
+        }
+
+        /* HIDE CLASS */
+        .hidden {
+            display: none;
+        }
+
+        /* FOOTER */
+        footer {
+            background: #12345a;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 30px;
+        }
+
+        @media(max-width: 600px) {
+            section {
+                margin: 12px;
+                padding: 15px;
+            }
+
+            nav {
+                gap: 15px;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header>
+    <h1>ENGINEERING VIRTUAL LABORATORY</h1>
+    <p>Learn | Experiment | Explore | Achieve</p>
+</header>
+
+<!-- NAVIGATION -->
+<nav>
+    <a href="#experiments">Experiments</a>
+    <a href="#objectives">Objectives</a>
+    <a href="#equipment">Equipment</a>
+    <a href="#video">Video</a>
+    <a href="#student">Student Form</a>
+</nav>
+
+<!-- EXPERIMENT SEARCH AND FILTER -->
+<section id="experiments">
+
+    <h2>Available Experiments</h2>
+
+    <p>Search experiments or filter them by engineering department.</p>
+
+    <div class="search-area">
+
+        <input type="text"
+               id="searchInput"
+               placeholder="Search experiment name...">
+
+        <select id="categoryFilter">
+            <option value="all">All Departments</option>
+            <option value="Electrical">Electrical</option>
+            <option value="Electronics">Electronics</option>
+            <option value="Mechanical">Mechanical</option>
+        </select>
+
+        <button id="resetButton" type="button">Reset</button>
+
+    </div>
+
+    <div class="experiment-grid" id="experimentList">
+
+        <!-- EXPERIMENT 1 -->
+        <div class="experiment-card" data-category="Electrical">
+
+            <img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=600"
+                 alt="Electrical laboratory">
+
+            <span class="category">Electrical</span>
+
+            <h3>Ohm's Law Experiment</h3>
+
+            <p>Study the relationship between voltage, current and resistance.</p>
+
+            <button class="details-button" type="button"
+                    data-name="Ohm's Law Experiment">
+                View Details
+            </button>
+
+        </div>
+
+        <!-- EXPERIMENT 2 -->
+        <div class="experiment-card" data-category="Electronics">
+
+            <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=600"
+                 alt="Electronic circuit board">
+
+            <span class="category">Electronics</span>
+
+            <h3>Logic Gates Experiment</h3>
+
+            <p>Understand the operation of AND, OR and NOT logic gates.</p>
+
+            <button class="details-button" type="button"
+                    data-name="Logic Gates Experiment">
+                View Details
+            </button>
+
+        </div>
+
+        <!-- EXPERIMENT 3 -->
+        <div class="experiment-card" data-category="Mechanical">
+
+            <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=600"
+                 alt="Mechanical engineering laboratory">
+
+            <span class="category">Mechanical</span>
+
+            <h3>DC Motor Experiment</h3>
+
+            <p>Study the working principle and operation of a DC motor.</p>
+
+            <button class="details-button" type="button"
+                    data-name="DC Motor Experiment">
+                View Details
+            </button>
+
+        </div>
+
+        <!-- EXPERIMENT 4 -->
+        <div class="experiment-card" data-category="Electrical">
+
+            <img src="https://images.unsplash.com/photo-1581092795360-fd1ca04f0952?w=600"
+                 alt="Electrical measurement equipment">
+
+            <span class="category">Electrical</span>
+
+            <h3>Kirchhoff's Law Experiment</h3>
+
+            <p>Verify Kirchhoff's current law and voltage law.</p>
+
+            <button class="details-button" type="button"
+                    data-name="Kirchhoff's Law Experiment">
+                View Details
+            </button>
+
+        </div>
+
+    </div>
+
+    <p id="resultCount"></p>
+
+    <p id="noResults" class="hidden">
+        No experiments found. Try another search.
+    </p>
+
+</section>
+
+<!-- OBJECTIVES AND PROCEDURES -->
+<section id="objectives">
+
+    <h2>Experiment Objectives and Procedures</h2>
+
+    <details>
+        <summary>1. Ohm's Law Experiment</summary>
+
+        <p><b>Objective:</b> To verify the relationship between voltage,
+        current and resistance.</p>
+
+        <p><b>Procedure:</b></p>
+
+        <ul>
+            <li>Connect the resistor to the power supply.</li>
+            <li>Measure the voltage using a voltmeter.</li>
+            <li>Measure the current using an ammeter.</li>
+            <li>Calculate resistance using V = IR.</li>
+            <li>Verify the experimental result.</li>
+        </ul>
+    </details>
+
+    <details>
+        <summary>2. Logic Gates Experiment</summary>
+
+        <p><b>Objective:</b> To understand basic digital logic gates.</p>
+
+        <p><b>Procedure:</b></p>
+
+        <ul>
+            <li>Select AND, OR and NOT gates.</li>
+            <li>Apply different input combinations.</li>
+            <li>Observe the output values.</li>
+            <li>Verify the truth table.</li>
+        </ul>
+    </details>
+
+    <details>
+        <summary>3. DC Motor Experiment</summary>
+
+        <p><b>Objective:</b> To study the working principle of a DC motor.</p>
+
+        <p><b>Procedure:</b></p>
+
+        <ul>
+            <li>Connect the DC motor to the supply.</li>
+            <li>Switch on the power supply.</li>
+            <li>Observe the direction of rotation.</li>
+            <li>Study the effect of voltage changes.</li>
+        </ul>
+    </details>
+
+    <details>
+        <summary>4. Kirchhoff's Law Experiment</summary>
+
+        <p><b>Objective:</b> To verify Kirchhoff's current and voltage laws.</p>
+
+        <p><b>Procedure:</b></p>
+
+        <ul>
+            <li>Construct a simple electrical circuit.</li>
+            <li>Measure current in different branches.</li>
+            <li>Measure voltage across components.</li>
+            <li>Compare the measured values.</li>
+        </ul>
+    </details>
+
+</section>
+
+<!-- EQUIPMENT IMAGE GALLERY -->
+<section id="equipment">
+
+    <h2>Laboratory Equipment Gallery</h2>
+
+    <div class="gallery">
+
+        <div class="gallery-item">
+            <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=600"
+                 alt="Digital multimeter">
+            <h3>Digital Multimeter</h3>
+            <p>Used to measure voltage, current and resistance.</p>
+        </div>
+
+        <div class="gallery-item">
+            <img src="https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?w=600"
+                 alt="Electronic circuit">
+            <h3>Circuit Board</h3>
+            <p>Used for constructing electronic circuits.</p>
+        </div>
+
+        <div class="gallery-item">
+            <img src="https://images.unsplash.com/photo-1581092795360-fd1ca04f0952?w=600"
+                 alt="Testing equipment">
+            <h3>Testing Equipment</h3>
+            <p>Used for laboratory testing and measurements.</p>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- INSTRUCTIONAL VIDEO -->
+<section id="video">
+
+    <h2>Instructional Video</h2>
+
+    <p>Watch the instructional video to understand virtual laboratory experiments.</p>
+
+    <div class="video-container">
+
+        <iframe
+            src="https://www.youtube-nocookie.com/embed/AJsDwJ2ndng"
+            title="Engineering Laboratory Instructional Video"
+            allowfullscreen>
+        </iframe>
+
+    </div>
+
+    <p>If the video does not load, replace the video ID with a working
+    instructional video ID.</p>
+
+</section>
+
+<!-- STUDENT DETAILS FORM -->
+<section id="student">
+
+    <h2>Student Registration Form</h2>
+
+    <form class="student-form" id="studentForm">
+
+        <div class="form-group">
+            <label for="studentName">Student Name</label>
+
+            <input type="text"
+                   id="studentName"
+                   placeholder="Enter your name"
+                   required>
+        </div>
+
+        <div class="form-group">
+            <label for="registerNumber">Register Number</label>
+
+            <input type="text"
+                   id="registerNumber"
+                   placeholder="Enter register number"
+                   required>
+        </div>
+
+        <div class="form-group">
+            <label for="studentEmail">Email Address</label>
+
+            <input type="email"
+                   id="studentEmail"
+                   placeholder="Enter email"
+                   required>
+        </div>
+
+        <div class="form-group">
+            <label for="department">Department</label>
+
+            <select id="department" required>
+
+                <option value="">Select Department</option>
+
+                <option>Computer Science Engineering</option>
+                <option>Electrical Engineering</option>
+                <option>Electronics Engineering</option>
+                <option>Mechanical Engineering</option>
+                <option>Civil Engineering</option>
+
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="semester">Semester</label>
+
+            <select id="semester" required>
+                <option value="">Select Semester</option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+                <option>7</option>
+                <option>8</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="selectedExperiment">Select Experiment</label>
+
+            <select id="selectedExperiment" required>
+                <option value="">Choose Experiment</option>
+                <option>Ohm's Law Experiment</option>
+                <option>Logic Gates Experiment</option>
+                <option>DC Motor Experiment</option>
+                <option>Kirchhoff's Law Experiment</option>
+            </select>
+        </div>
+
+        <div class="form-button">
+            <button type="submit">Submit Details</button>
+        </div>
+
+    </form>
+
+    <p id="message"></p>
+
+</section>
+
+<footer>
+    <h3>Engineering Virtual Laboratory</h3>
+    <p>Learn | Practice | Innovate</p>
+    <p>Designed for Engineering Students</p>
+</footer>
+
+
+<!-- JAVASCRIPT -->
+<script>
+
+// SELECT HTML ELEMENTS
+const searchInput = document.querySelector("#searchInput");
+const categoryFilter = document.querySelector("#categoryFilter");
+const resetButton = document.querySelector("#resetButton");
+
+const experimentCards =
+    document.querySelectorAll(".experiment-card");
+
+const resultCount = document.querySelector("#resultCount");
+const noResults = document.querySelector("#noResults");
+
+
+// EXPERIMENT DATA
+const experiments = [
+    {
+        name: "Ohm's Law Experiment",
+        category: "Electrical"
+    },
+    {
+        name: "Logic Gates Experiment",
+        category: "Electronics"
+    },
+    {
+        name: "DC Motor Experiment",
+        category: "Mechanical"
+    },
+    {
+        name: "Kirchhoff's Law Experiment",
+        category: "Electrical"
+    }
+];
+
+
+// SEARCH AND FILTER FUNCTION
+function filterExperiments() {
+
+    const searchValue = searchInput.value.toLowerCase();
+
+    const selectedCategory = categoryFilter.value;
+
+    // FILTER EXPERIMENTS
+    const filteredExperiments = experiments.filter(function(exp) {
+
+        const matchesName =
+            exp.name.toLowerCase().includes(searchValue);
+
+        const matchesCategory =
+            selectedCategory === "all" ||
+            exp.category === selectedCategory;
+
+        return matchesName && matchesCategory;
+
+    });
+
+
+    // SHOW AND HIDE EXPERIMENT CARDS
+    experimentCards.forEach(function(card) {
+
+        const experimentName =
+            card.querySelector("h3").textContent;
+
+        const foundExperiment = filteredExperiments.find(function(exp) {
+            return exp.name === experimentName;
+        });
+
+        if (foundExperiment) {
+
+            card.classList.remove("hidden");
+
+        } else {
+
+            card.classList.add("hidden");
+
+        }
+
+    });
+
+
+    // DISPLAY RESULT COUNT
+    resultCount.textContent =
+        "Experiments found: " + filteredExperiments.length;
+
+    if (filteredExperiments.length === 0) {
+
+        noResults.classList.remove("hidden");
+
+    } else {
+
+        noResults.classList.add("hidden");
+
+    }
+
+}
+
+
+// SEARCH EVENT
+searchInput.addEventListener("input", filterExperiments);
+
+
+// CATEGORY FILTER EVENT
+categoryFilter.addEventListener("change", filterExperiments);
+
+
+// RESET SEARCH AND FILTER
+resetButton.addEventListener("click", function() {
+
+    searchInput.value = "";
+
+    categoryFilter.value = "all";
+
+    filterExperiments();
+
+});
+
+
+// EXPERIMENT DETAILS BUTTON
+const detailButtons =
+    document.querySelectorAll(".details-button");
+
+detailButtons.forEach(function(button) {
+
+    button.addEventListener("click", function() {
+
+        const experimentName = button.dataset.name;
+
+        // Find matching experiment
+        const selectedExperiment = experiments.find(function(exp) {
+            return exp.name === experimentName;
+        });
+
+        if (selectedExperiment) {
+
+            const objectiveSection =
+                document.querySelector("#objectives");
+
+            // Scroll to objectives and procedures
+            objectiveSection.scrollIntoView({
+                behavior: "smooth"
+            });
+
+        }
+
+    });
+
+});
+
+
+// ACCORDION INTERACTION
+const accordionItems = document.querySelectorAll("#objectives details");
+
+accordionItems.forEach(function(item) {
+
+    item.querySelector("summary").addEventListener("click", function() {
+
+        item.classList.toggle("active");
+
+    });
+
+});
+
+
+// STUDENT FORM SUBMISSION
+document.querySelector("#studentForm").addEventListener("submit", function(event) {
+
+    event.preventDefault();
+
+    const name = document.querySelector("#studentName").value;
+
+    const register = document.querySelector("#registerNumber").value;
+
+    const experiment = document.querySelector("#selectedExperiment").value;
+
+    const message = document.querySelector("#message");
+
+    message.textContent =
+        "Thank you, " + name +
+        "! Your details have been submitted successfully. " +
+        "Register Number: " + register +
+        ". Selected Experiment: " + experiment;
+
+    // Add success animation class
+    message.classList.add("success");
+
+    // Reset the form
+    this.reset();
+
+});
+
+
+// DISPLAY INITIAL EXPERIMENT COUNT
+filterExperiments();
+
+</script>
+
+</body>
+</html>
